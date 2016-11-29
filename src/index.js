@@ -1,6 +1,8 @@
 if (!global._babelPolyfill) {
   require('babel-polyfill')
 }
+import ExtendableError from 'es6-error';
+
 function middlewareFunc(defaultCodeFunc, middleWareFunc) {
   return async (req, res) => {
 
@@ -49,17 +51,10 @@ export class HttpResult {
   }
 }
 
-export class HttpError extends Error {
+export class HttpError extends ExtendableError {
   constructor(message, statusCode) {
     super(message);
     this.httpStatus = statusCode;
-    this.name = this.constructor.name;
-    this.message = message;
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, this.constructor);
-    } else {
-      this.stack = (new Error(message)).stack;
-    }
   }
 }
 
