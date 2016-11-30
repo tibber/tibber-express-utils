@@ -45,7 +45,7 @@ export function jsonRouting(expressRouter) {
 }
 
 export class HttpResult {
-  contructor(statusCode, payload) {
+  constructor(statusCode, payload) {    
     this.statusCode = statusCode;
     this.payload = payload;
   }
