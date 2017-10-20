@@ -3,11 +3,11 @@ if (!global._babelPolyfill) {
 }
 import ExtendableError from 'es6-error';
 
-function middlewareFunc(defaultCodeFunc, middleWareFunc) {
+function middlewareFunc(defaultCodeFunc, middleWareFunc, contextFunc) {
   return async (req, res) => {
 
     try {
-      const result = await middleWareFunc(req);
+      const result = await middleWareFunc(req, contextFunc(req));
 
       if (result instanceof HttpResult) {
         return res.status(result.statusCode || 200).json(result.payload);
@@ -26,7 +26,7 @@ function middlewareFunc(defaultCodeFunc, middleWareFunc) {
   }
 }
 
-export function jsonRouting(expressRouter) {
+export function jsonRouting(expressRouter, contextFunc) {
 
   expressRouter.expressGet = expressRouter.get;
   expressRouter.expressPost = expressRouter.post;
@@ -34,18 +34,19 @@ export function jsonRouting(expressRouter) {
   expressRouter.expressPut = expressRouter.put;
   expressRouter.expressDelete = expressRouter.delete;
 
-  expressRouter.get = (path, middleWareFunc) => expressRouter.expressGet(path, middlewareFunc(r => 200, middleWareFunc));
-  expressRouter.post = (path, middleWareFunc) => expressRouter.expressPost(path, middlewareFunc(r => r ? 202 : 204, middleWareFunc));
-  expressRouter.patch = (path, middleWareFunc) => expressRouter.expressPatch(path, middlewareFunc(r => r ? 200 : 204, middleWareFunc));
-  expressRouter.put = (path, middleWareFunc) => expressRouter.expressPut(path, middlewareFunc(r => r ? 200 : 204, middleWareFunc));
-  expressRouter.delete = (path, middleWareFunc) => expressRouter.expressDelete(path, middlewareFunc(r => r ? 200 : 204, middleWareFunc));
+  contextFunc = contextFunc || (req => req.context);
+  expressRouter.get = (path, middleWareFunc) => expressRouter.expressGet(path, middlewareFunc(r => 200, middleWareFunc, contextFunc));
+  expressRouter.post = (path, middleWareFunc) => expressRouter.expressPost(path, middlewareFunc(r => r ? 202 : 204, middleWareFunc, contextFunc));
+  expressRouter.patch = (path, middleWareFunc) => expressRouter.expressPatch(path, middlewareFunc(r => r ? 200 : 204, middleWareFunc, contextFunc));
+  expressRouter.put = (path, middleWareFunc) => expressRouter.expressPut(path, middlewareFunc(r => r ? 200 : 204, middleWareFunc, contextFunc));
+  expressRouter.delete = (path, middleWareFunc) => expressRouter.expressDelete(path, middlewareFunc(r => r ? 200 : 204, middleWareFunc, contextFunc));
 
   return expressRouter;
 
 }
 
 export class HttpResult {
-  constructor(statusCode, payload) {    
+  constructor(statusCode, payload) {
     this.statusCode = statusCode;
     this.payload = payload;
   }
