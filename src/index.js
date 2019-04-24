@@ -17,6 +17,12 @@ function middlewareFunc(defaultCodeFunc, middleWareFunc, contextFunc) {
     }
     catch (err) {
 
+      if (err instanceof ProblemDetailsError) {
+        const { detail, type, instance, httpStatus: status } = err;
+        return res.contentType('application/problem+json').send(JSON.stringify({
+          detail, type, instance, status
+        }));
+      }
       if (err instanceof HttpError) {
         return res.status(err.httpStatus || 500).send({ err: err.message });
       }
@@ -89,6 +95,15 @@ export class ServerError extends HttpError {
   }
 }
 
+export class ProblemDetailsError extends HttpError {
+  constructor({ detail, type, instance, status }) {
+    super(detail, status);
+    this.detail = detail;
+    this.type = type;
+    this.instance = instance;
+  }
+}
+
 export class Errors {
   static badRequestError(message) { return new BadRequestError(message) };
   static serverError(message) { return new ServerError(message) };
@@ -96,4 +111,5 @@ export class Errors {
   static notFoundError(message) { return new NotFoundError(message) };
   static conflictError(message) { return new ConflictError(message) };
   static httpError(message, statusCode) { return new HttpError(message, statusCode) };
+  static problemDetailsError(payload) { return new ProblemDetailsError(payload) };
 }
