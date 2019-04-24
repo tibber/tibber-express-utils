@@ -19,7 +19,7 @@ function middlewareFunc(defaultCodeFunc, middleWareFunc, contextFunc) {
 
       if (err instanceof ProblemDetailsError) {
         const { detail, type, instance, httpStatus: status } = err;
-        return res.contentType('application/problem+json').send(JSON.stringify({
+        return res.status(status).contentType('application/problem+json').send(JSON.stringify({
           detail, type, instance, status
         }));
       }
