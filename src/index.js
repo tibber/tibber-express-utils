@@ -11,7 +11,7 @@ function middlewareFunc(defaultCodeFunc, middleWareFunc, contextFunc) {
 
       if (result instanceof HttpResult) {
         if (result.headers) {
-          for (let header in Object.keys(result.headers)) {
+          for (let header in result.headers) {
             res.set(header, result.headers[header]);
           }
         }
