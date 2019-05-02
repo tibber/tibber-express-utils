@@ -23,9 +23,9 @@ function middlewareFunc(defaultCodeFunc, middleWareFunc, contextFunc) {
     catch (err) {
 
       if (err instanceof ProblemDetailsError) {
-        const { detail, type, instance, httpStatus: status } = err;
+        const { detail, type, instance, httpStatus: status, title } = err;
         return res.status(status).contentType('application/problem+json').send(JSON.stringify({
-          detail, type, instance, status
+          detail, type, instance, status, title
         }));
       }
       if (err instanceof HttpError) {
@@ -102,11 +102,12 @@ export class ServerError extends HttpError {
 }
 
 export class ProblemDetailsError extends HttpError {
-  constructor({ detail, type, instance, status }) {
+  constructor({ detail, type, instance, status, title }) {
     super(detail, status);
     this.detail = detail;
     this.type = type;
     this.instance = instance;
+    this.title = title;
   }
 }
 
