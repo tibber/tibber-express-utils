@@ -10,6 +10,11 @@ function middlewareFunc(defaultCodeFunc, middleWareFunc, contextFunc) {
       const result = await middleWareFunc(req, contextFunc(req));
 
       if (result instanceof HttpResult) {
+        if (result.headers) {
+          for (let header in Object.keys(result.headers)) {
+            res.set(header, result.headers[header]);
+          }
+        }
         return res.status(result.statusCode || 200).json(result.payload);
       }
       res.status(defaultCodeFunc(result)).json(result);
@@ -52,9 +57,10 @@ export function jsonRouting(expressRouter, contextFunc) {
 }
 
 export class HttpResult {
-  constructor(statusCode, payload) {
+  constructor(statusCode, payload, headers) {
     this.statusCode = statusCode;
     this.payload = payload;
+    this.headers = headers;
   }
 }
 
