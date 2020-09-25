@@ -10,23 +10,24 @@
     "login": "npm-cli-login -u $NPM_USERNAME -p $NPM_PASSWORD -e $NPM_EMAIL"
   },
   "ava": {
-    "require": ["babel-register","babel-polyfill"],
-    "babel": {
-      "babelrc": true
-    }
+    "require": [
+      "@babel/register",
+      "@babel/polyfill"
+    ],
+    "babel": true
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^0.17.0",
-    "babel-cli": "^6.18.0",
-    "babel-plugin-syntax-async-functions": "^6.1.4",
-    "babel-plugin-transform-regenerator": "^6.1.4",
-    "babel-preset-es2015": "^6.1.4"
+    "ava": "^3.12.1",
+    "@ava/babel": "1.0.1",
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5"
   },
   "dependencies": {
-    "babel-polyfill": "^6.1.4",
-    "es6-error": "^4.0.0",
-    "publish": "^0.6.0"
+    "@babel/polyfill": "^7.11.5",
+    "@babel/register": "7.11.5",
+    "es6-error": "^4.0.0"
   }
 }
