@@ -1,7 +1,7 @@
 import {HttpError} from './httpError';
 
 export class NotFoundError extends HttpError {
-  constructor(message) {
+  constructor(message: string) {
     super(message, 404);
   }
 }

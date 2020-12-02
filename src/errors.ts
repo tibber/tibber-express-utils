@@ -7,27 +7,27 @@ import {HttpError} from './httpError';
 import {ProblemDetailsError} from './problemDetailsError';
 
 export class Errors {
-  static badRequestError(message) {
+  static badRequestError(message: string) {
     return new BadRequestError(message);
   }
 
-  static serverError(message) {
+  static serverError(message: string) {
     return new ServerError(message);
   }
 
-  static notAuthorizedError(message) {
+  static notAuthorizedError(message: string) {
     return new NotAuthorizedError(message);
   }
 
-  static notFoundError(message) {
+  static notFoundError(message: string) {
     return new NotFoundError(message);
   }
 
-  static conflictError(message) {
+  static conflictError(message: string) {
     return new ConflictError(message);
   }
 
-  static httpError(message, statusCode) {
+  static httpError(message: string, statusCode: number) {
     return new HttpError(message, statusCode);
   }
 
