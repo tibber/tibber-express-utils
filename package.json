@@ -4,7 +4,6 @@
   "description": "",
   "main": "./build/index.js",
   "scripts": {
-    "build": "babel src -d lib",
     "2npm": "publish",
     "test": "ava --verbose",
     "login": "npm-cli-login -u $NPM_USERNAME -p $NPM_PASSWORD -e $NPM_EMAIL",

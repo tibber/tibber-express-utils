@@ -20,18 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bbe9060-f9f9-4e5f-bb58-ff1d53e84a96" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/httpError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/httpResult.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpResult.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jsonRouting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/jsonRouting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middlewareFunc.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/problemDetailsError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/problemDetailsError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606914509978</updated>
-      <workItem from="1606914511483" duration="21273000" />
+      <workItem from="1606914511483" duration="21677000" />
     </task>
     <servers />
   </component>
@@ -118,10 +111,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="397" y="199" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1607003855683" />
-    <state width="500" height="445" key="SwitcherDM" timestamp="1607093208475">
+    <state width="500" height="445" key="SwitcherDM" timestamp="1607093500835">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="500" height="445" key="SwitcherDM/0.0.1792.1120@0.0.1792.1120" timestamp="1607093208475" />
+    <state width="500" height="445" key="SwitcherDM/0.0.1792.1120@0.0.1792.1120" timestamp="1607093500835" />
     <state x="597" y="286" width="598" height="548" key="find.popup" timestamp="1606999133269">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>

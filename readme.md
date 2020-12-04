@@ -1,3 +1,5 @@
+# Usage
+
 ## Install
 
 ```
@@ -48,3 +50,16 @@ In order to migrate to `2.0.0`:
    - E.g. `router.expressGet(...)` becomes `router.get(...)`
 2. update all calls to overriden HTTP RequestHandler methods to `router.jsonXXX(...)`.
    - E.g. `router.get(...)` becomes `router.jsonGet(...)`
+
+# Development
+
+Uses `gts`, Google's base `typescript` environment configuration.
+
+To test, run `yarn test`.
+To compile, run `yarn compile`. Assets will be in `/build`.
+
+## Linting and formatting
+
+`gts` includes sane (and strict) settings for `eslint` and `prettier`.
+
+Run `yarn lint --fix` to run eslint on the whole project.
