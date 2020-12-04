@@ -4,7 +4,7 @@ import {NotAuthorizedError} from './notAuthorizedError';
 import {NotFoundError} from './notFoundError';
 import {ConflictError} from './conflictError';
 import {HttpError} from './httpError';
-import {ProblemDetailsError} from './problemDetailsError';
+import {ProblemDetailsArgs, ProblemDetailsError} from './problemDetailsError';
 
 export class Errors {
   static badRequestError(message: string) {
@@ -31,7 +31,7 @@ export class Errors {
     return new HttpError(message, statusCode);
   }
 
-  static problemDetailsError(payload) {
+  static problemDetailsError(payload: ProblemDetailsArgs) {
     return new ProblemDetailsError(payload);
   }
 }

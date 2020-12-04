@@ -4,7 +4,7 @@ export * from './errors';
 export * from './httpError';
 export * from './httpResult';
 export * from './jsonRouting';
-export * from './middlewareFunc';
+export * from './middleware';
 export * from './notAuthorizedError';
 export * from './notFoundError';
 export * from './problemDetailsError';

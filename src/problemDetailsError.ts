@@ -1,12 +1,12 @@
 import {HttpError} from './httpError';
 
-type ProblemDetailsArgs = {
-  detail: string,
-  type: string,
-  instance: string,
-  statusCode: number,
-  title: string
-}
+export type ProblemDetailsArgs = {
+  detail: string;
+  type: string;
+  instance: string;
+  statusCode: number;
+  title: string;
+};
 
 export class ProblemDetailsError extends HttpError {
   public detail: string;
