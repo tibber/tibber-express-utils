@@ -15,6 +15,7 @@
     "pretest": "yarn run compile",
     "posttest": "yarn run lint",
     "semantic-release": "semantic-release",
+    "cz": "git add . && git commit -m",
     "cz:init": "commitizen init cz-conventional-changelog --yarn --dev --exact"
   },
   "ava": {
