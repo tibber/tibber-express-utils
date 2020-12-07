@@ -8,10 +8,8 @@ import {Router} from 'express';
 import {PathParams} from 'express-serve-static-core';
 
 /**
- * An AugmentedRouter has replaced an express Router's default IRouterMatcher HTTP method implementations
- * (get, post, put etc.) with versions that inject Tibber's middleware.
- *
- * The original implementations are preserved under 'expressXXX' notation.
+ * A JsonRouter is an express.Router instance that also provides shorthand HTTP methods
+ * using Tibber's middleware under the 'jsonXXX' naming convention.
  */
 export type JsonRouter<TContext> = Router & {
   jsonGet: JsonRouteMatcher<TContext>;
@@ -61,17 +59,19 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
   // strategy for determining the request's HTTP status code.
   //
 
+  const NotFoundIfNoCodeOtherwiseOk = (code: number | undefined) =>
+    code === undefined ? 404 : 200;
+
+  const NoContentIfNoCodeOtherwiseOk = (code: number | undefined) =>
+    code ? 202 : 204;
+
   jsonRouter.jsonGet = <TPayload>(
     path: PathParams,
     handler: TibberRequestHandler<TContext, TPayload>
   ) =>
     jsonRouter.get(
       path,
-      middleware(
-        (code: number | undefined) => (code === undefined ? 404 : 200),
-        _contextSelector,
-        handler
-      )
+      middleware(NotFoundIfNoCodeOtherwiseOk, _contextSelector, handler)
     );
 
   jsonRouter.jsonPost = <TPayload>(
@@ -80,11 +80,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
   ) =>
     jsonRouter.post(
       path,
-      middleware(
-        (code: number | undefined) => (code ? 202 : 204),
-        _contextSelector,
-        handler
-      )
+      middleware(NoContentIfNoCodeOtherwiseOk, _contextSelector, handler)
     );
 
   jsonRouter.jsonPatch = <TPayload>(
@@ -93,11 +89,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
   ) =>
     jsonRouter.patch(
       path,
-      middleware(
-        (code: number | undefined) => (code ? 200 : 204),
-        _contextSelector,
-        handler
-      )
+      middleware(NoContentIfNoCodeOtherwiseOk, _contextSelector, handler)
     );
 
   jsonRouter.jsonPut = <TPayload>(
@@ -106,11 +98,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
   ) =>
     jsonRouter.put(
       path,
-      middleware(
-        (code: number | undefined) => (code ? 200 : 204),
-        _contextSelector,
-        handler
-      )
+      middleware(NoContentIfNoCodeOtherwiseOk, _contextSelector, handler)
     );
 
   jsonRouter.jsonDelete = <TPayload>(
@@ -119,11 +107,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
   ) =>
     jsonRouter.delete(
       path,
-      middleware(
-        (code: number | undefined) => (code ? 200 : 204),
-        _contextSelector,
-        handler
-      )
+      middleware(NoContentIfNoCodeOtherwiseOk, _contextSelector, handler)
     );
 
   return jsonRouter;
