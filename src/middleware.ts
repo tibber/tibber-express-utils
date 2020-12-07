@@ -1,10 +1,10 @@
-import {HttpResult} from './httpResult';
-import {HttpError} from './httpError';
-import {ProblemDetailsError} from './problemDetailsError';
 import {Request, Response} from 'express';
+import {HttpError} from './httpError';
+import {HttpResult} from './httpResult';
+import {ProblemDetailsError} from './problemDetailsError';
 
 export type HttpStatusCodeSelector = (
-  httpStatusCode: number | undefined
+  httpStatusCode: undefined | number
 ) => number;
 
 /**
@@ -16,7 +16,7 @@ const isHttpResult = <TPayload>(
   result: RequestHandlerResult<TPayload>
 ): result is HttpResult<TPayload> => result instanceof HttpResult;
 
-type RequestHandlerResult<TPayload> = HttpResult<TPayload> | number | undefined;
+type RequestHandlerResult<TPayload> = undefined | HttpResult<TPayload> | number;
 
 export type TibberRequestHandler<TContext, TPayload> = (
   req: Request,
@@ -100,14 +100,14 @@ export const middleware: Middleware = (
        * additional details as a JSON payload.
        */
       if (err instanceof ProblemDetailsError) {
-        const {detail, type, instance, httpStatus: status, title} = err;
+        const {detail, httpStatus: status, instance, title, type} = err;
         return res.status(status).contentType('application/problem+json').send(
           JSON.stringify({
             detail,
-            type,
             instance,
             status,
             title,
+            type,
           })
         );
       }

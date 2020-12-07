@@ -1,22 +1,22 @@
+import {Router} from 'express';
+import {PathParams} from 'express-serve-static-core';
 import {
   ContextSelector,
   DefaultContextSelector,
-  middleware,
   TibberRequestHandler,
+  middleware,
 } from './middleware';
-import {Router} from 'express';
-import {PathParams} from 'express-serve-static-core';
 
 /**
  * A JsonRouter is an express.Router instance that also provides shorthand HTTP methods
  * using Tibber's middleware under the 'jsonXXX' naming convention.
  */
 export type JsonRouter<TContext> = Router & {
-  jsonGet: JsonRouteMatcher<TContext>;
-  jsonPost: JsonRouteMatcher<TContext>;
-  jsonPatch: JsonRouteMatcher<TContext>;
-  jsonPut: JsonRouteMatcher<TContext>;
   jsonDelete: JsonRouteMatcher<TContext>;
+  jsonGet: JsonRouteMatcher<TContext>;
+  jsonPatch: JsonRouteMatcher<TContext>;
+  jsonPost: JsonRouteMatcher<TContext>;
+  jsonPut: JsonRouteMatcher<TContext>;
 };
 
 type JsonRouteMatcher<TContext> = {
@@ -36,6 +36,12 @@ type JsonRouting<TContext = unknown> = {
 type ContextOf<
   TContextSelector extends ContextSelector<unknown>
 > = TContextSelector extends ContextSelector<infer U> ? U : never;
+
+const NotFoundIfNoCodeOtherwiseOk = (code: undefined | number) =>
+  code === undefined ? 404 : 200;
+
+const NoContentIfNoCodeOtherwiseOk = (code: undefined | number) =>
+  code ? 202 : 204;
 
 export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
   /**
@@ -58,12 +64,6 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
   // Decorate 'jsonRouter' with each HTTP method by injecting Tibber's middleware and providing a default
   // strategy for determining the request's HTTP status code.
   //
-
-  const NotFoundIfNoCodeOtherwiseOk = (code: number | undefined) =>
-    code === undefined ? 404 : 200;
-
-  const NoContentIfNoCodeOtherwiseOk = (code: number | undefined) =>
-    code ? 202 : 204;
 
   jsonRouter.jsonGet = <TPayload>(
     path: PathParams,

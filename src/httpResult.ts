@@ -1,4 +1,4 @@
-type HttpHeaderValue = string | string[] | undefined;
+type HttpHeaderValue = undefined | string | string[];
 
 type HttpHeaders = {
   [key: string]: HttpHeaderValue;

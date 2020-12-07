@@ -2,10 +2,10 @@ import {HttpError} from './httpError';
 
 export type ProblemDetailsArgs = {
   detail: string;
-  type: string;
   instance: string;
   statusCode: number;
   title: string;
+  type: string;
 };
 
 export class ProblemDetailsError extends HttpError {
@@ -15,7 +15,7 @@ export class ProblemDetailsError extends HttpError {
   public title: string;
 
   constructor(args: ProblemDetailsArgs) {
-    const {detail, type, instance, statusCode, title} = args;
+    const {detail, instance, statusCode, title, type} = args;
 
     super(detail, statusCode);
 
