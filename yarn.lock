@@ -34,6 +34,13 @@
   resolved "https://registry.yarnpkg.com/@ava/require-precompiled/-/require-precompiled-1.0.0.tgz#6f4a48b75904a753eadff020bbfca81d3bbc0357"
   integrity sha512-N7w4g+P/SUL8SF+HC4Z4e/ctV6nQ5AERC90K90r4xZQ8WVrJux9albvfyYAzygyU47CSqMWh6yJwFs8DYaeWmg==
 
+"@ava/typescript@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@ava/typescript/-/typescript-1.1.1.tgz#3dcaba3aced8026fdb584d927d809752854dc6e6"
+  integrity sha512-KbLUAe2cWXK63WLK6LnOJonjwEDU/8MNXCOA1ooX/YFZgKRmeAD1kZu+2K0ks5fnOCEcckNQAooyBNGdZUmMQA==
+  dependencies:
+    escape-string-regexp "^2.0.0"
+
 "@babel/cli@^7.11.6":
   version "7.11.6"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.11.6.tgz#1fcbe61c2a6900c3539c06ee58901141f3558482"

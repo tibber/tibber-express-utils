@@ -20,20 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bbe9060-f9f9-4e5f-bb58-ff1d53e84a96" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.huskyrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.lintstagedrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.prettierignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.sortierignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.sortierrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/errors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/errors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/httpResult.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/httpResult.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jsonRouting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/jsonRouting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/problemDetailsError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/problemDetailsError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.md" beforeDir="false" afterPath="$PROJECT_DIR$/todo.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606914509978</updated>
-      <workItem from="1606914511483" duration="25017000" />
+      <workItem from="1606914511483" duration="26038000" />
     </task>
     <servers />
   </component>
