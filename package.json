@@ -1,6 +1,6 @@
 {
   "name": "tibber-express-utils",
-  "version": "0.0.0-development",
+  "version": "1.8.1",
   "description": "",
   "main": "./build/src/index.js",
   "scripts": {
@@ -14,8 +14,9 @@
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
     "posttest": "yarn run lint",
-    "semantic-release": "semantic-release",
-    "cz": "git add . && git commit -m",
+    "release": "semantic-release",
+    "release:local": "run.env semantic-release",
+    "cz": "git add . && cz",
     "cz:init": "commitizen init cz-conventional-changelog --yarn --dev --exact"
   },
   "ava": {
@@ -44,6 +45,7 @@
     "gts": "^3.0.2",
     "husky": "^4.3.5",
     "lint-staged": "^10.5.3",
+    "run.env": "^1.1.0",
     "semantic-release": "^17.3.0",
     "typescript": "^4.0.3"
   },

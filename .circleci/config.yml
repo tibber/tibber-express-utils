@@ -8,9 +8,7 @@ jobs:
       - checkout
       - run:
           name: Deploy Package
-          command: |     
-            sudo npm install -g npm-cli-login publish
-            yarn  
-            yarn build
-            npm run login
-            npm run 2npm      
+          command: |
+            yarn
+            yarn compile
+            yarn release
