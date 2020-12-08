@@ -2,7 +2,7 @@ export * from './badRequestError';
 export * from './conflictError';
 export * from './errors';
 export * from './httpError';
-export * from './httpResult';
+export * from './HttpResult';
 export * from './jsonRouting';
 export * from './middleware';
 export * from './notAuthorizedError';

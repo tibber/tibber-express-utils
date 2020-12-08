@@ -1,5 +1,5 @@
-  - [ ] install husky, conventional-commits and semantic release.
-  - [ ] add prettier to eslint configuration, so that `yarn lint --fix` also formats.
+  - [x] install husky, conventional-commits and semantic release.
+  - [x] add prettier to eslint configuration, so that `yarn lint --fix` also formats.
   - [ ] add tests for each `jsonXXX` handler.
   - [ ] publish package under 2.0.0 and notify devs.
   - [ ] get list of consuming packages.
