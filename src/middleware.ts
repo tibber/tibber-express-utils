@@ -18,7 +18,7 @@ const isHttpResult = <TPayload>(
 
 type RequestHandlerResult<TPayload> = undefined | HttpResult<TPayload> | number;
 
-export type TibberRequestHandler<TContext, TPayload> = (
+export type JsonRequestHandler<TContext, TPayload> = (
   req: Request,
   ctx: TContext
 ) => RequestHandlerResult<TPayload>;
@@ -27,7 +27,7 @@ export type Middleware = {
   <TContext, TPayload>(
     httpStatusCodeSelector: HttpStatusCodeSelector,
     contextSelector: ContextSelector<TContext>,
-    handler: TibberRequestHandler<TContext, TPayload>
+    handler: JsonRequestHandler<TContext, TPayload>
   ): (req: Request, res: Response) => Promise<Response<TPayload>>;
 };
 

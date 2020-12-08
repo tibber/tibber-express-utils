@@ -3,7 +3,7 @@ import {PathParams} from 'express-serve-static-core';
 import {
   ContextSelector,
   DefaultContextSelector,
-  TibberRequestHandler,
+  JsonRequestHandler,
   middleware,
 } from './middleware';
 
@@ -22,7 +22,7 @@ export type JsonRouter<TContext> = Router & {
 type JsonRouteMatcher<TContext> = {
   <TPayload>(
     path: PathParams,
-    handler: TibberRequestHandler<TContext, TPayload>
+    handler: JsonRequestHandler<TContext, TPayload>
   ): JsonRouter<TContext>;
 };
 
@@ -67,7 +67,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
 
   jsonRouter.jsonGet = <TPayload>(
     path: PathParams,
-    handler: TibberRequestHandler<TContext, TPayload>
+    handler: JsonRequestHandler<TContext, TPayload>
   ) =>
     jsonRouter.get(
       path,
@@ -76,7 +76,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
 
   jsonRouter.jsonPost = <TPayload>(
     path: PathParams,
-    handler: TibberRequestHandler<TContext, TPayload>
+    handler: JsonRequestHandler<TContext, TPayload>
   ) =>
     jsonRouter.post(
       path,
@@ -85,7 +85,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
 
   jsonRouter.jsonPatch = <TPayload>(
     path: PathParams,
-    handler: TibberRequestHandler<TContext, TPayload>
+    handler: JsonRequestHandler<TContext, TPayload>
   ) =>
     jsonRouter.patch(
       path,
@@ -94,7 +94,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
 
   jsonRouter.jsonPut = <TPayload>(
     path: PathParams,
-    handler: TibberRequestHandler<TContext, TPayload>
+    handler: JsonRequestHandler<TContext, TPayload>
   ) =>
     jsonRouter.put(
       path,
@@ -103,7 +103,7 @@ export const jsonRouting: JsonRouting = (expressRouter, contextSelector?) => {
 
   jsonRouter.jsonDelete = <TPayload>(
     path: PathParams,
-    handler: TibberRequestHandler<TContext, TPayload>
+    handler: JsonRequestHandler<TContext, TPayload>
   ) =>
     jsonRouter.delete(
       path,
