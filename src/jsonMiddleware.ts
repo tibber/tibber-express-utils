@@ -1,58 +1,9 @@
 import {Request, Response} from 'express';
-import {HttpError} from './HttpError';
-import {HttpResult} from './HttpResult';
-import {ProblemDetailsError} from './ProblemDetailsError';
+import {HttpError, ProblemDetailsError} from './errors';
+import {JsonMiddleware} from './types';
+import {isHttpResult} from './utils/isHttpResult';
 
-export type HttpStatusCodeSelector = (
-  httpStatusCode: undefined | number
-) => number;
-
-/**
- * Guard to check whether a RequestHandlerResult is an HttpResult object, preserving its
- * payload type.
- * @param result
- */
-const isHttpResult = <TPayload>(
-  result: RequestHandlerResult<TPayload>
-): result is HttpResult<TPayload> => result instanceof HttpResult;
-
-type RequestHandlerResult<TPayload> = undefined | HttpResult<TPayload> | number;
-
-export type JsonRequestHandler<TContext, TPayload> = (
-  req: Request,
-  ctx: TContext
-) => RequestHandlerResult<TPayload>;
-
-export type Middleware = {
-  <TContext, TPayload>(
-    httpStatusCodeSelector: HttpStatusCodeSelector,
-    contextSelector: ContextSelector<TContext>,
-    handler: JsonRequestHandler<TContext, TPayload>
-  ): (req: Request, res: Response) => Promise<Response<TPayload>>;
-};
-
-/**
- * Where relevant, extracts a context object from the express Request instance.
- */
-export type ContextSelector<TContext> = (request: Request) => TContext;
-
-/**
- * By default, Tibber's middleware attempts to obtain a context object from the 'context' property,
- * which may be set on the express Request instance. If one isn't found, it returns undefined.
- */
-export const DefaultContextSelector: ContextSelector<unknown> = request => {
-  if (!hasOwnProperty(request, 'context')) return undefined;
-  return request['context'];
-};
-
-const hasOwnProperty = <X extends {}, Y extends PropertyKey>(
-  obj: X,
-  prop: Y
-): obj is X & Record<Y, unknown> => {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-};
-
-export const middleware: Middleware = (
+export const jsonMiddleware: JsonMiddleware = (
   httpStatusCodeSelector,
   contextSelector,
   handler
@@ -60,7 +11,7 @@ export const middleware: Middleware = (
   return async (req: Request, res: Response) => {
     try {
       /**
-       * Exeute the RequestHandler provided against the request, extracting the context
+       * Execute the RequestHandler provided against the request, extracting the context
        * and providing it as an argument.
        */
       const context = contextSelector(req);

@@ -1,5 +1,5 @@
 import test from 'ava';
-import express, {Request, Router, application} from 'express';
+import express, {Router} from 'express';
 import request from 'supertest';
 import {HttpResult, jsonRouting} from '.';
 
@@ -10,7 +10,7 @@ test('jsonGet', async t => {
 
   const expected = {foo: 'bar'};
 
-  jsonRouter.jsonGet('/test', req => {
+  jsonRouter.jsonGet('/test', () => {
     return new HttpResult(200, expected);
   });
 

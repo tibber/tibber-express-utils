@@ -1,4 +1,5 @@
 export * from './HttpResult';
 export * from './jsonRouting';
-export * from './middleware';
+export * from './jsonMiddleware';
 export * as Errors from './errors';
+export * from './types';
