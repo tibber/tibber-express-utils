@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
+import {HttpError} from './HttpError';
 import {HttpResult} from './HttpResult';
-import {HttpError} from './httpError';
-import {ProblemDetailsError} from './problemDetailsError';
+import {ProblemDetailsError} from './ProblemDetailsError';
 
 export type HttpStatusCodeSelector = (
   httpStatusCode: undefined | number

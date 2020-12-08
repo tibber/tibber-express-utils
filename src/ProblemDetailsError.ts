@@ -1,4 +1,4 @@
-import {HttpError} from './httpError';
+import {HttpError} from './HttpError';
 
 export type ProblemDetailsArgs = {
   detail: string;

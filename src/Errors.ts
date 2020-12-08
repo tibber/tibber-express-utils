@@ -1,10 +1,10 @@
-import {BadRequestError} from './badRequestError';
-import {ConflictError} from './conflictError';
-import {HttpError} from './httpError';
-import {NotAuthorizedError} from './notAuthorizedError';
-import {NotFoundError} from './notFoundError';
-import {ProblemDetailsArgs, ProblemDetailsError} from './problemDetailsError';
-import {ServerError} from './serverError';
+import {BadRequestError} from './BadRequestError';
+import {ConflictError} from './ConflictError';
+import {HttpError} from './HttpError';
+import {NotAuthorizedError} from './NotAuthorizedError';
+import {NotFoundError} from './NotFoundError';
+import {ProblemDetailsArgs, ProblemDetailsError} from './ProblemDetailsError';
+import {ServerError} from './ServerError';
 
 export class Errors {
   static badRequestError(message: string) {
