@@ -1,5 +1,5 @@
 import test from 'ava';
-import {HttpResult} from '../src';
+import {HttpResult} from '.';
 
 test('should be able to create HttpResult', t => {
   const payload = {test: 2};
