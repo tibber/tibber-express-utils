@@ -1,11 +1,24 @@
 import test from 'ava';
-import {Router} from 'express';
-import {jsonRouting} from '.';
+import express, {Request, Router, application} from 'express';
+import request from 'supertest';
+import {HttpResult, jsonRouting} from '.';
 
-test('jsonGet', t => {
+test('jsonGet', async t => {
   const router = Router({});
   const jsonRouter = jsonRouting(router);
   t.truthy(jsonRouter.jsonGet);
+
+  const expected = {foo: 'bar'};
+
+  jsonRouter.jsonGet('/test', req => {
+    return new HttpResult(200, expected);
+  });
+
+  const app = express();
+  app.use(jsonRouter);
+
+  const response = await request(app).get('/test').expect(200);
+  t.deepEqual(response.body, expected);
 });
 
 test('jsonPost', t => {
