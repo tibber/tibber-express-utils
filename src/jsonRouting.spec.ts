@@ -21,12 +21,6 @@ test('jsonGet', async t => {
   t.deepEqual(response.body, expected);
 });
 
-test('jsonPost', t => {
-  const router = Router({});
-  const jsonRouter = jsonRouting(router);
-  t.truthy(jsonRouter.jsonPost);
-});
-
 test('jsonPut', t => {
   const router = Router({});
   const jsonRouter = jsonRouting(router);
