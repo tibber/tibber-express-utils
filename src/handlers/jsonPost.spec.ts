@@ -29,46 +29,46 @@ const run = (
 
 describe('jsonPost', () => {
   it(
-    "jsonPost - returns 204 (Not Found) when handler returns 'undefined' (falsy)",
+    "returns 204 (Not Found) when handler returns 'undefined' (falsy)",
     run('return', undefined, 204, {})
   );
 
   it(
-    "jsonPost - returns 204 (Not Found) when handler returns '0' (falsy)",
+    "returns 204 (Not Found) when handler returns '0' (falsy)",
     run('return', 0, 204, {})
   );
 
   it(
-    'jsonPost - returns 202 (Accepted) when handler returns non-zero / truthy code',
+    'returns 202 (Accepted) when handler returns non-zero / truthy code',
     run('return', {foo: 'bar'}, 202, {foo: 'bar'})
   );
 
   it(
-    "jsonPost - returns handler's HTTP status and payload when handler returns HttpResult",
+    "returns handler's HTTP status and payload when handler returns HttpResult",
     run('return', new HttpResult(200, {foo: 'bar'}), 200, {foo: 'bar'})
   );
 
   it(
-    'jsonPost - returns error when handler returns HttpError',
+    'returns error when handler returns HttpError',
     run('throw', new HttpError('oops', 404), 404, {err: 'oops'})
   );
 
   it(
-    'jsonPost - returns error when handler returns ProblemDetailsError',
+    'returns error code and JSON error details when handler returns ProblemDetailsError',
     run(
       'throw',
       new ProblemDetailsError({
         detail: 'err_detail',
         instance: 'err_instance',
-        statusCode: 404,
+        statusCode: 403,
         title: 'err_title',
         type: 'err_type',
       }),
-      404,
+      403,
       {
         detail: 'err_detail',
         instance: 'err_instance',
-        status: 404,
+        status: 403,
         title: 'err_title',
         type: 'err_type',
       }
