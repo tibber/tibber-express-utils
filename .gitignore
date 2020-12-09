@@ -44,4 +44,5 @@ node_modules
 dist
 bower_components
 config.json
-build
+.idea
+.env
