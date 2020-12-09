@@ -16,16 +16,22 @@ import { jsonRouting, HttpResult, ConflictError, NotFoundError, NotAuthorizedErr
 //decorate router with jsonrouting
 const router = jsonRouting(express.Router());
 
+/**
+ * Use Tibber's middleware shorthand functions with the 'jsonXXX' naming convention.
+ */
 
-router.get('/api/test', req=>({test:123})); //return result directy
-router.get('/api/test2', req=>(new HttpResult(230, {test:123}))); //return result with customer statuscode
-router.get('/api/test3', req=> throw new NotFoundError('this is a test error'));
+router.jsonGet('/api/test', req=>({test:123})); //return result directy
+router.jsonGet('/api/test2', req=>(new HttpResult(230, {test:123}))); //return result with customer statuscode
+router.jsonGet('/api/test3', req=> throw new NotFoundError('this is a test error'));
 
-router.post('/api/test4', async req=>{ //supports promises
+router.jsonGet('/api/test4', async req=>{ //supports promises
     return await someAsyncOperation();
 });
 
-router.expressGet('/api/test5', (req, res)=>{
+/**
+ * Use original express functions as normal
+ */
+router.get('/api/test5', (req, res)=>{
   // regular express func;
 });
 ```
