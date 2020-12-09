@@ -2,7 +2,7 @@
   "name": "tibber-express-utils",
   "version": "1.8.1",
   "description": "",
-  "main": "./build/src/index.js",
+  "main": "./dist/src/index.js",
   "scripts": {
     "2npm": "publish",
     "test": "jest ./src --verbose",
@@ -22,8 +22,7 @@
   "ava": {
     "typescript": {
       "rewritePaths": {
-        "src/": "build/src/",
-        "test/": "build/test/"
+        "src/": "dist/src/"
       }
     }
   },

@@ -23,8 +23,7 @@ export const jsonMiddleware: JsonMiddleware = (
        * the httpStatusCodeSelector provided.
        *
        * This might be used if the handler returns a different object,
-       * such as an Error instance, from which the HTTP Status Code needs
-       * to be manually extracted.
+       * from which the HTTP Status Code needs to be manually extracted.
        */
       if (!isHttpResult(result)) {
         const httpStatusCode = httpStatusCodeSelector(result);

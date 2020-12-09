@@ -1,2 +1,3 @@
-export const NotFoundIfNoCodeOtherwiseOk = (code: undefined | number) =>
-  code === undefined ? 404 : 200;
+export const NotFoundIfNoCodeOtherwiseOk = (
+  code: undefined | number | unknown
+) => (code === undefined ? 404 : 200);

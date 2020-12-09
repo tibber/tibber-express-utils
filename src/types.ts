@@ -62,6 +62,7 @@ export type JsonRequestHandler<TContext, TPayload> = (
 export type JsonRequestHandlerResult<TPayload> =
   | undefined
   | HttpResult<TPayload>
+  | TPayload
   | number;
 
 /**
@@ -88,5 +89,5 @@ export type JsonMiddleware = {
  * JsonRequestHandlerResult type.
  */
 export type HttpStatusCodeSelector = (
-  httpStatusCode: undefined | number
+  httpStatusCode: undefined | number | unknown
 ) => number;

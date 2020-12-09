@@ -3,19 +3,20 @@ import request from 'supertest';
 import {HttpResult} from '../HttpResult';
 import {HttpError, ProblemDetailsError} from '../errors';
 import {jsonRouting} from '../jsonRouting';
+import {JsonRequestHandlerResult} from '../types';
 
-const run = (
+const run = <TResult, TPayload>(
   type: 'return' | 'throw',
-  result: any,
+  result: JsonRequestHandlerResult<TResult>,
   expectCode: number,
-  expectPayload: any
+  expectPayload: TPayload
 ) => async () => {
   const router = Router({});
   const jsonRouter = jsonRouting(router);
 
   expect(jsonRouter.jsonPatch).toBeTruthy();
 
-  jsonRouter.jsonPatch('/test', req => {
+  jsonRouter.jsonPatch('/test', () => {
     if (type === 'throw') throw result;
     return result;
   });

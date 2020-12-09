@@ -1,2 +1,3 @@
-export const NoContentIfNoCodeOtherwiseOk = (code: undefined | number) =>
-  code ? 202 : 204;
+export const NoContentIfNoCodeOtherwiseOk = (
+  code: undefined | number | unknown
+) => (code ? 202 : 204);
