@@ -13,9 +13,9 @@ const run = (
   const router = Router({});
   const jsonRouter = jsonRouting(router);
 
-  expect(jsonRouter.jsonPost).toBeTruthy();
+  expect(jsonRouter.jsonPatch).toBeTruthy();
 
-  jsonRouter.jsonPost('/test', req => {
+  jsonRouter.jsonPatch('/test', req => {
     if (type === 'throw') throw result;
     return result;
   });
@@ -23,11 +23,11 @@ const run = (
   const app = express();
   app.use(jsonRouter);
 
-  const response = await request(app).post('/test').expect(expectCode);
+  const response = await request(app).patch('/test').expect(expectCode);
   expect(response.body).toStrictEqual(expectPayload);
 };
 
-describe('jsonPost', () => {
+describe('jsonPatch', () => {
   it(
     "returns 204 (Not Found) when handler returns 'undefined' (falsy)",
     run('return', undefined, 204, {})

@@ -13,9 +13,9 @@ const run = (
   const router = Router({});
   const jsonRouter = jsonRouting(router);
 
-  expect(jsonRouter.jsonPost).toBeTruthy();
+  expect(jsonRouter.jsonGet).toBeTruthy();
 
-  jsonRouter.jsonPost('/test', req => {
+  jsonRouter.jsonGet('/test', req => {
     if (type === 'throw') throw result;
     return result;
   });
@@ -23,24 +23,19 @@ const run = (
   const app = express();
   app.use(jsonRouter);
 
-  const response = await request(app).post('/test').expect(expectCode);
+  const response = await request(app).get('/test').expect(expectCode);
   expect(response.body).toStrictEqual(expectPayload);
 };
 
-describe('jsonPost', () => {
+describe('jsonDelete', () => {
   it(
-    "returns 204 (Not Found) when handler returns 'undefined' (falsy)",
-    run('return', undefined, 204, {})
+    "returns 404 (Not Found) when handler returns 'undefined' (falsy)",
+    run('return', undefined, 404, '')
   );
 
   it(
-    "returns 204 (Not Found) when handler returns '0' (falsy)",
-    run('return', 0, 204, {})
-  );
-
-  it(
-    'returns 202 (Accepted) when handler returns non-zero / truthy code',
-    run('return', {foo: 'bar'}, 202, {foo: 'bar'})
+    'returns 200 (Ok) when handler returns non-zero / truthy code',
+    run('return', {foo: 'bar'}, 200, {foo: 'bar'})
   );
 
   it(
