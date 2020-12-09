@@ -1,4 +1,11 @@
-version: 2
+version: 2.1
+workflows:
+  build_and_deploy:
+    jobs:
+      - build:
+          context:
+            - GITHUB
+            - NPM
 jobs:
   build:
     working_directory: ~/package
