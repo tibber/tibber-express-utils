@@ -49,12 +49,12 @@ describe('jsonPost', () => {
   );
 
   it(
-    'returns error when handler returns HttpError',
+    "returns error code and 'err' msg when handler throws HttpError",
     run('throw', new HttpError('oops', 404), 404, {err: 'oops'})
   );
 
   it(
-    'returns error code and JSON error details when handler returns ProblemDetailsError',
+    'returns error code and JSON error details when handler throws ProblemDetailsError',
     run(
       'throw',
       new ProblemDetailsError({
@@ -73,5 +73,19 @@ describe('jsonPost', () => {
         type: 'err_type',
       }
     )
+  );
+
+  it(
+    "returns 500 and 'err' msg when handler throws string Error",
+    run('throw', 'foo', 500, {
+      err: 'foo',
+    })
+  );
+
+  it(
+    "returns 500 and 'err' msg from toString() when handler throws object",
+    run('throw', new Error('foo'), 500, {
+      err: 'Error: foo',
+    })
   );
 });
