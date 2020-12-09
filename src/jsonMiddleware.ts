@@ -52,15 +52,13 @@ export const jsonMiddleware: JsonMiddleware = (
        */
       if (err instanceof ProblemDetailsError) {
         const {detail, httpStatus: status, instance, title, type} = err;
-        return res.status(status).contentType('application/problem+json').send(
-          JSON.stringify({
-            detail,
-            instance,
-            status,
-            title,
-            type,
-          })
-        );
+        return res.status(status).contentType('application/problem+json').json({
+          detail,
+          instance,
+          status,
+          title,
+          type,
+        });
       }
 
       /**
