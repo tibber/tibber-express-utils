@@ -1,10 +1,10 @@
 import test, {ExecutionContext} from 'ava';
 import express, {Router} from 'express';
 import request from 'supertest';
-import {HttpResult} from '../HttpResult';
-import {HttpError, ProblemDetailsError} from '../errors';
-import {jsonRouting} from '../jsonRouting';
-import {JsonRequestHandlerResult} from '../types';
+import {HttpResult} from '../../src/HttpResult';
+import {HttpError, ProblemDetailsError} from '../../src/errors';
+import {jsonRouting} from '../../src/jsonRouting';
+import {JsonRequestHandlerResult} from '../../src/types';
 
 const run = <TResult, TPayload>(
   type: 'return' | 'throw',

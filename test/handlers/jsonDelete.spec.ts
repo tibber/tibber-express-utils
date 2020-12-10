@@ -1,10 +1,10 @@
 import test, {ExecutionContext} from 'ava';
 import express, {Router} from 'express';
 import request from 'supertest';
-import {HttpResult} from '../HttpResult';
-import {HttpError, ProblemDetailsError} from '../errors';
-import {jsonRouting} from '../jsonRouting';
-import {JsonRequestHandlerResult} from '../types';
+import {HttpResult} from '../../src/HttpResult';
+import {HttpError, ProblemDetailsError} from '../../src/errors';
+import {jsonRouting} from '../../src/jsonRouting';
+import {JsonRequestHandlerResult} from '../../src/types';
 
 const run = <TResult, TPayload>(
   type: 'return' | 'throw',
@@ -15,7 +15,7 @@ const run = <TResult, TPayload>(
   const router = Router({});
   const jsonRouter = jsonRouting(router);
 
-  jsonRouter.jsonGet('/test', () => {
+  jsonRouter.jsonDelete('/test', () => {
     if (type === 'throw') throw result;
     return result;
   });
@@ -23,18 +23,23 @@ const run = <TResult, TPayload>(
   const app = express();
   app.use(jsonRouter);
 
-  const response = await request(app).get('/test').expect(expectCode);
+  const response = await request(app).delete('/test').expect(expectCode);
   t.deepEqual(response.body, expectPayload);
 };
 
 test(
-  "returns 404 (Not Found) when handler returns 'undefined' (falsy)",
-  run('return', undefined, 404, '')
+  "returns 204 (Not Found) when handler returns 'undefined' (falsy)",
+  run('return', undefined, 204, {})
 );
 
 test(
-  'returns 200 (Ok) when handler returns non-zero / truthy code',
-  run('return', {foo: 'bar'}, 200, {foo: 'bar'})
+  "returns 204 (Not Found) when handler returns '0' (falsy)",
+  run('return', 0, 204, {})
+);
+
+test(
+  'returns 202 (Accepted) when handler returns non-zero / truthy code',
+  run('return', {foo: 'bar'}, 202, {foo: 'bar'})
 );
 
 test(

@@ -1,10 +1,10 @@
 import test, {ExecutionContext} from 'ava';
 import express, {Router} from 'express';
 import request from 'supertest';
-import {HttpResult} from '../HttpResult';
-import {HttpError, ProblemDetailsError} from '../errors';
-import {jsonRouting} from '../jsonRouting';
-import {JsonRequestHandlerResult} from '../types';
+import {HttpResult} from '../../src/HttpResult';
+import {HttpError, ProblemDetailsError} from '../../src/errors';
+import {jsonRouting} from '../../src/jsonRouting';
+import {JsonRequestHandlerResult} from '../../src/types';
 
 const run = <TResult, TPayload>(
   type: 'return' | 'throw',
@@ -15,7 +15,7 @@ const run = <TResult, TPayload>(
   const router = Router({});
   const jsonRouter = jsonRouting(router);
 
-  jsonRouter.jsonPut('/test', () => {
+  jsonRouter.jsonPatch('/test', () => {
     if (type === 'throw') throw result;
     return result;
   });
@@ -23,7 +23,7 @@ const run = <TResult, TPayload>(
   const app = express();
   app.use(jsonRouter);
 
-  const response = await request(app).put('/test').expect(expectCode);
+  const response = await request(app).patch('/test').expect(expectCode);
   t.deepEqual(response.body, expectPayload);
 };
 
