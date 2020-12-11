@@ -4,9 +4,7 @@
   "description": "",
   "main": "./dist/src/index.js",
   "scripts": {
-    "2npm": "publish",
     "test": "ava --verbose",
-    "login": "npm-cli-login -u $NPM_USERNAME -p $NPM_PASSWORD -e $NPM_EMAIL",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
