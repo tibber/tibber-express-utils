@@ -19,6 +19,9 @@
     "cz": "git add . && cz",
     "cz:init": "commitizen init cz-conventional-changelog --yarn --dev --exact"
   },
+  "files": [
+    "/dist"
+  ],
   "ava": {
     "typescript": {
       "rewritePaths": {
