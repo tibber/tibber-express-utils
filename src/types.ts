@@ -21,6 +21,8 @@ export type ContextSelector<TContext> = (request: Request) => TContext;
 /**
  * A JsonRouter is an express.Router instance that also provides shorthand HTTP methods
  * using Tibber's jsonMiddleware under the 'jsonXXX' naming convention.
+ *
+ * Poke
  */
 export type JsonRouter<TContext> = Router & {
   jsonDelete: JsonRouteMatcher<TContext>;
