@@ -2,12 +2,25 @@ version: 2.1
 workflows:
   build_and_deploy:
     jobs:
-      - build:
+      - build_and_deploy:
           context:
             - GITHUB
             - NPM
+          filters:
+            branches:
+              only:
+              - master
+  build_only:
+    jobs:
+      - build_only:
+          context:
+            - GITHUB
+          filters:
+            branches:
+              ignore:
+              - master
 jobs:
-  build:
+  build_and_deploy:
     working_directory: ~/package
     docker:
       - image: circleci/node:10
@@ -19,3 +32,14 @@ jobs:
             yarn
             yarn compile
             yarn release
+  build_only:
+    working_directory: ~/package
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Deploy Package
+          command: |
+            yarn
+            yarn compile
