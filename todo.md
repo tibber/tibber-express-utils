@@ -4,4 +4,4 @@
   - [x] publish package under 2.0.0 and notify devs.
   - [ ] get list of consuming packages.
   - [ ] add PR for each other repo consuming package.
-  - [ ] check for compatibility in Windows/PS
+  - [ ] check for compatibility in Windows/PS with git hook
