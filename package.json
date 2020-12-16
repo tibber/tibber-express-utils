@@ -14,7 +14,7 @@
     "posttest": "yarn run lint",
     "release": "semantic-release",
     "release:local": "dotenv semantic-release",
-    "release:preview": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+    "release:preview": "npm pack --dry-run --json --loglevel=silent",
     "cz": "git add . && cz",
     "cz:init": "commitizen init cz-conventional-changelog --yarn --dev --exact"
   },
