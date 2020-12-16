@@ -13,7 +13,7 @@
     "pretest": "yarn run compile",
     "posttest": "yarn run lint",
     "release": "semantic-release",
-    "release:local": "run.env semantic-release",
+    "release:local": "dotenv semantic-release",
     "release:preview": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
     "cz": "git add . && cz",
     "cz:init": "commitizen init cz-conventional-changelog --yarn --dev --exact"
@@ -41,6 +41,7 @@
     "commitizen": "^4.2.2",
     "conventional-commits": "^1.6.0",
     "cz-conventional-changelog": "3.3.0",
+    "dotenv-cli": "^4.0.0",
     "eslint-plugin-ava": "^11.0.0",
     "express": "^4.17.1",
     "gts": "^3.0.2",
