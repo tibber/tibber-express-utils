@@ -27,10 +27,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy Package
+          name: Compile, Run Tests and Deploy Package
           command: |
             yarn
-            yarn compile
+            yarn test
             yarn release
   build_only:
     working_directory: ~/package
@@ -39,7 +39,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy Package
+          name: Compile and Run Tests
           command: |
             yarn
-            yarn compile
+            yarn test
