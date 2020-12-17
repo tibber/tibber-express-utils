@@ -6,7 +6,8 @@ import {isHttpResult} from './utils/isHttpResult';
 export const jsonMiddleware: JsonMiddleware = (
   httpStatusCodeSelector,
   contextSelector,
-  handler
+  handler,
+  errorLogger
 ) => {
   return async (req: Request, res: Response) => {
     try {
@@ -46,6 +47,14 @@ export const jsonMiddleware: JsonMiddleware = (
       return res.status(result.statusCode || 200).json(result.payload);
     } catch (err) {
       /**
+       * If 'err' is an object that has a toString method, call it to get its string representation.
+       */
+      const errorAsString = err && err.toString ? err.toString() : err;
+      if (errorLogger && errorLogger.error) {
+        errorLogger.error(`ERROR ${req.method} ${req.url} ${errorAsString}`);
+      }
+
+      /**
        * If 'err' is a ProblemDetailsError object, extract the status code and send the
        * additional details as a JSON payload.
        */
@@ -69,10 +78,8 @@ export const jsonMiddleware: JsonMiddleware = (
       }
 
       /**
-       * If 'err' is an object that has a toString method, call it to get its string representation and
-       * send that as the message instead of the error object.
+       * As last resort, send error's string representation as the message.
        */
-      const errorAsString = err && err.toString ? err.toString() : err;
       return res.status(500).send({err: errorAsString});
     }
   };

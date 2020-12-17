@@ -16,6 +16,9 @@ import { jsonRouting, HttpResult, ConflictError, NotFoundError, NotAuthorizedErr
 //decorate router with jsonrouting
 const router = jsonRouting(express.Router());
 
+//provide logger which receives error messages raised during request handling
+const router = jsonRouting({expressRouter:express.Router(), errorLogger:logger});
+
 /**
  * Use Tibber's middleware shorthand functions with the 'jsonXXX' naming convention.
  */

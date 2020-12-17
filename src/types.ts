@@ -2,6 +2,12 @@ import {Request, Response, Router} from 'express';
 import {PathParams} from 'express-serve-static-core';
 import {HttpResult} from './HttpResult';
 
+export type JsonRoutingParams<TContext = unknown> = {
+  contextSelector?: ContextSelector<TContext>;
+  errorLogger?: Logger;
+  expressRouter: Router;
+};
+
 /**
  * Configures an express.Router instance as a JsonRouter, adding the 'jsonXXX'
  * api which routes requests through Tibber's jsonMiddleware.
@@ -9,7 +15,8 @@ import {HttpResult} from './HttpResult';
 export type JsonRouting<TContext = unknown> = {
   (
     expressRouter: Router,
-    contextSelector?: ContextSelector<TContext>
+    contextSelector?: ContextSelector<TContext>,
+    errorLogger?: Logger
   ): JsonRouter<TContext>;
 };
 
@@ -68,6 +75,15 @@ export type JsonRequestHandlerResult<TPayload> =
   | number;
 
 /**
+ * The Logger interface whose implementation is to be supplied by the consuming service.
+ */
+export interface Logger {
+  debug?(...args: any[]): unknown;
+  error?(...args: any[]): unknown;
+  info?(...args: any[]): unknown;
+}
+
+/**
  * Maps the JsonRequestHandlerResult of a JsonRequestHandler to the Response
  * object, and provides standard error handling semantics for all 'jsonXXX'
  * api calls.
@@ -77,12 +93,16 @@ export type JsonRequestHandlerResult<TPayload> =
  *
  * A ContextSelector can be provided to extract a Context instance from the
  * Request instance, and pass it as an argument to the JsonRequestHandler.
+ *
+ * An Logger instance, if provided, will receive error messages raised during
+ * request handling.
  */
 export type JsonMiddleware = {
   <TContext, TPayload>(
     httpStatusCodeSelector: HttpStatusCodeSelector,
     contextSelector: ContextSelector<TContext>,
-    handler: JsonRequestHandler<TContext, TPayload>
+    handler: JsonRequestHandler<TContext, TPayload>,
+    errorLogger?: Logger
   ): (req: Request, res: Response) => Promise<Response<TPayload>>;
 };
 
