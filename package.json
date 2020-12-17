@@ -15,7 +15,8 @@
     "release": "semantic-release",
     "release:local": "dotenv semantic-release",
     "release:preview": "npm pack --dry-run --json --loglevel=silent",
-    "cz": "git add . && cz",
+    "cz": "git status && cz",
+    "cz:all": "git add . && git status && cz",
     "cz:init": "commitizen init cz-conventional-changelog --yarn --dev --exact"
   },
   "files": [
