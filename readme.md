@@ -13,10 +13,7 @@ $ yarn install --save tibber-express-utils
 
 ```js
 import { jsonRouting, HttpResult, ConflictError, NotFoundError, NotAuthorizedError, BadRequestError, ServerError } from 'tibber-express-utils';
-//decorate router with jsonrouting
-const router = jsonRouting(express.Router());
-
-//provide logger which receives error messages raised during request handling
+//decorate router with jsonrouting and provide an (optional) logger to receive messages raised during request handling.
 const router = jsonRouting({expressRouter:express.Router(), errorLogger:logger});
 
 /**
@@ -62,6 +59,22 @@ In order to migrate to `2.0.0`:
    - E.g. `router.expressGet(...)` becomes `router.get(...)`
 2. update all calls to overriden HTTP RequestHandler methods to `router.jsonXXX(...)`.
    - E.g. `router.get(...)` becomes `router.jsonGet(...)`
+
+## Upgrading to 3.0.0
+
+Breaking changes in `3.0.0` include:
+
+ - `jsonRouting(...)` now accepts a single object containing the parameters.
+
+Other changes:
+
+ - `jsonRouting(...)` also accepts a logger which is used to log all exceptions occurring during request handling.
+## Migration from 2.0.* to 3.0.0
+
+In order to migrate to `3.0.0`:
+
+1. Update `jsonRouting(express.Router(), contextSelector)` statements to `jsonRouting({contextSelector, expressRouter: express.Router()})` or
+   more preferably to `jsonRouting({contextSelector, errorLogger: logger, expressRouter: express.Router()})`).
 
 # Development
 

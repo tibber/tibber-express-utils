@@ -1,17 +1,14 @@
 import {DefaultContextSelector} from './DefaultContextSelector';
 import {jsonDelete, jsonGet, jsonPatch, jsonPost, jsonPut} from './handlers';
-import {JsonRouter, JsonRouting, JsonRoutingParams, Logger} from './types';
+import {JsonRouter, JsonRouting} from './types';
 import {ContextOf} from './utils/ContextOf';
 
-export const jsonRouting: JsonRouting = (
-  expressRouter,
-  contextSelector?,
-  errorLogger?: Logger
-) => {
+export const jsonRouting: JsonRouting = routingParams => {
   /**
    * If a ContextSelector isn't provided, use the default implementation.
    */
-  const _contextSelector = contextSelector || DefaultContextSelector;
+  const _contextSelector =
+    routingParams.contextSelector || DefaultContextSelector;
 
   /**
    * Infer the type of the Context from the ContextSelector provided.
@@ -22,7 +19,8 @@ export const jsonRouting: JsonRouting = (
   /**
    * Use the original Router object as a JsonRouter instance.
    */
-  const jsonRouter = expressRouter as JsonRouter<TContext>;
+  const jsonRouter = routingParams.expressRouter as JsonRouter<TContext>;
+  const errorLogger = routingParams.errorLogger;
 
   //
   // Decorate 'jsonRouter' with each HTTP method by injecting Tibber's jsonMiddleware and providing a default
@@ -36,10 +34,3 @@ export const jsonRouting: JsonRouting = (
 
   return jsonRouter;
 };
-
-export const jsonRoutingEx = (jsonRoutingParams: JsonRoutingParams) =>
-  jsonRouting(
-    jsonRoutingParams.expressRouter,
-    jsonRoutingParams.contextSelector,
-    jsonRoutingParams.errorLogger
-  );

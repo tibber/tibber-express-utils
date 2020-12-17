@@ -3,7 +3,7 @@ import express, {Router} from 'express';
 import request from 'supertest';
 import {HttpResult} from '../../src/HttpResult';
 import {HttpError, ProblemDetailsError} from '../../src/errors';
-import {jsonRoutingEx} from '../../src/jsonRouting';
+import {jsonRouting} from '../../src/jsonRouting';
 import {JsonRequestHandlerResult} from '../../src/types';
 
 class TestLogger {
@@ -23,7 +23,7 @@ const run = <TResult, TPayload>(
 ) => async (t: ExecutionContext) => {
   const router = Router({});
   const errorLogger = new TestLogger();
-  const jsonRouter = jsonRoutingEx({errorLogger, expressRouter: router});
+  const jsonRouter = jsonRouting({errorLogger, expressRouter: router});
 
   jsonRouter.jsonGet('/test', () => {
     if (type === 'throw') throw result;
