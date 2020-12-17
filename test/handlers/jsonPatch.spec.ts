@@ -13,7 +13,7 @@ const run = <TResult, TPayload>(
   expectPayload: TPayload
 ) => async (t: ExecutionContext) => {
   const router = Router({});
-  const jsonRouter = jsonRouting(router);
+  const jsonRouter = jsonRouting({expressRouter: router});
 
   jsonRouter.jsonPatch('/test', () => {
     if (type === 'throw') throw result;

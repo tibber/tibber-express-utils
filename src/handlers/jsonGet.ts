@@ -11,7 +11,7 @@ import {
 export const jsonGet = <TContext>(
   jsonRouter: JsonRouter<TContext>,
   _contextSelector: ContextSelector<TContext>,
-  errorLogger?: Logger
+  logger?: Logger
 ) => <TPayload>(
   path: PathParams,
   handler: JsonRequestHandler<TContext, TPayload>
@@ -22,6 +22,6 @@ export const jsonGet = <TContext>(
       NotFoundIfNoCodeOtherwiseOk,
       _contextSelector,
       handler,
-      errorLogger
+      logger
     )
   );

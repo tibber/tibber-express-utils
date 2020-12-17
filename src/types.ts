@@ -2,10 +2,13 @@ import {Request, Response, Router} from 'express';
 import {PathParams} from 'express-serve-static-core';
 import {HttpResult} from './HttpResult';
 
-export type JsonRoutingParams<TContext = unknown> = {
+/**
+ * Params for constructing the jsonRouter.
+ */
+export type JsonRouterParams<TContext = unknown> = {
   contextSelector?: ContextSelector<TContext>;
-  errorLogger?: Logger;
   expressRouter: Router;
+  logger?: Logger;
 };
 
 /**
@@ -13,11 +16,7 @@ export type JsonRoutingParams<TContext = unknown> = {
  * api which routes requests through Tibber's jsonMiddleware.
  */
 export type JsonRouting<TContext = unknown> = {
-  (
-    expressRouter: Router,
-    contextSelector?: ContextSelector<TContext>,
-    errorLogger?: Logger
-  ): JsonRouter<TContext>;
+  (jsonRouterParams: JsonRouterParams<TContext>): JsonRouter<TContext>;
 };
 
 /**
@@ -102,7 +101,7 @@ export type JsonMiddleware = {
     httpStatusCodeSelector: HttpStatusCodeSelector,
     contextSelector: ContextSelector<TContext>,
     handler: JsonRequestHandler<TContext, TPayload>,
-    errorLogger?: Logger
+    logger?: Logger
   ): (req: Request, res: Response) => Promise<Response<TPayload>>;
 };
 

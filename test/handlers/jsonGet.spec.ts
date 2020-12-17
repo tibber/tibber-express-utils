@@ -3,7 +3,7 @@ import express, {Router} from 'express';
 import request from 'supertest';
 import {HttpResult} from '../../src/HttpResult';
 import {HttpError, ProblemDetailsError} from '../../src/errors';
-import {jsonRoutingEx} from '../../src/jsonRouting';
+import {jsonRouting} from '../../src/jsonRouting';
 import {JsonRequestHandlerResult} from '../../src/types';
 
 class TestLogger {
@@ -22,8 +22,8 @@ const run = <TResult, TPayload>(
   expectLogMsg?: string
 ) => async (t: ExecutionContext) => {
   const router = Router({});
-  const errorLogger = new TestLogger();
-  const jsonRouter = jsonRoutingEx({errorLogger, expressRouter: router});
+  const logger = new TestLogger();
+  const jsonRouter = jsonRouting({expressRouter: router, logger});
 
   jsonRouter.jsonGet('/test', () => {
     if (type === 'throw') throw result;
@@ -35,7 +35,7 @@ const run = <TResult, TPayload>(
 
   const response = await request(app).get('/test').expect(expectCode);
   t.deepEqual(response.body, expectPayload);
-  t.deepEqual(errorLogger.lastError, expectLogMsg);
+  t.deepEqual(logger.lastError, expectLogMsg);
 };
 
 test(

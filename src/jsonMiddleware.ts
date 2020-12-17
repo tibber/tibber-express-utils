@@ -7,7 +7,7 @@ export const jsonMiddleware: JsonMiddleware = (
   httpStatusCodeSelector,
   contextSelector,
   handler,
-  errorLogger
+  logger
 ) => {
   return async (req: Request, res: Response) => {
     try {
@@ -50,8 +50,8 @@ export const jsonMiddleware: JsonMiddleware = (
        * If 'err' is an object that has a toString method, call it to get its string representation.
        */
       const errorAsString = err && err.toString ? err.toString() : err;
-      if (errorLogger && errorLogger.error) {
-        errorLogger.error(`ERROR ${req.method} ${req.url} ${errorAsString}`);
+      if (logger && logger.error) {
+        logger.error(`ERROR ${req.method} ${req.url} ${errorAsString}`);
       }
 
       /**
