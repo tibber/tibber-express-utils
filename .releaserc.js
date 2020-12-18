@@ -27,7 +27,8 @@ module.exports = {
          */
         'next',
         /**
-         * Pre-releases are published for testing and preview purposes.
+         * Pre-releases are published for testing and preview purposes. Any branch that doesn't match
+         * a support, master or next branch will be released as a pre-release branch.
          * 
          * Pre-release versions take the form M.N.P-<branch>.X where 
          *  - M, N and P are the major, minor and patch number of the semver that will be published 
