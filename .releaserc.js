@@ -43,7 +43,7 @@ module.exports = {
             /**
              * pre-release as vX.X.X-beta.N from the last version tag in branch's commit history
              */
-            name: '.*', 
+            name: '*', 
             prerelease: true
         }],
     plugins: [
