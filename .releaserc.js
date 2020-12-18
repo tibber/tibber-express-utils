@@ -27,8 +27,7 @@ module.exports = {
          */
         'next',
         /**
-         * Pre-releases are published for testing and preview purposes. Any branch that doesn't match
-         * a support, master or next branch will be released as a pre-release branch.
+         * Pre-releases are published for testing and preview purposes.
          * 
          * Pre-release versions take the form M.N.P-<branch>.X where 
          *  - M, N and P are the major, minor and patch number of the semver that will be published 
@@ -41,9 +40,9 @@ module.exports = {
          */
         {
             /**
-             * pre-release as vX.X.X-beta.N from the last version tag in branch's commit history
+             * pre-release as vX.X.X-<branch>.N from the last version tag in branch's commit history
              */
-            name: '*', 
+            name: '**', 
             prerelease: true
         }],
     plugins: [
