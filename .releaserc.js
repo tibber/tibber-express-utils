@@ -16,7 +16,7 @@ module.exports = {
          */
         'master', 
         /**
-         * Early releases to a @next channel, meant as release candidates or optional upgrades.
+         * Early releases to a @next channel, meant as stable release candidates or optional upgrades.
          * 
          * Early releases won't be installed with `yarn add <pkg>`, unless the version or tag is
          * explicitly specified. So, `yarn add <pkg>:next` will.
@@ -27,7 +27,7 @@ module.exports = {
          */
         'next',
         /**
-         * Pre-releases are published for testing and preview purposes.
+         * Pre-releases are unstable and published for testing and preview purposes.
          * 
          * Pre-release versions take the form M.N.P-<branch>.X where 
          *  - M, N and P are the major, minor and patch number of the semver that will be published 
@@ -42,7 +42,7 @@ module.exports = {
             /**
              * pre-release as vX.X.X-<branch>.N from the last version tag in branch's commit history
              */
-            name: '**', 
+            name: '*',
             prerelease: true
         }],
     plugins: [
