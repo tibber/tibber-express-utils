@@ -37,6 +37,14 @@ module.exports = {
          * 
          * Pre-releases won't be installed with `yarn add <pkg>`, unless the version or tag is
          * explicitly specified. So, `yarn add <pkg>:v3.2.1-branch.1` will.
+         * 
+         * In order to publish a pre-release package, ensure you branch name conforms to semver 
+         * guidelines, and consists of only numbers, alphanumeric characters and dashes (-).
+         * 
+         * If the repository contains single-word branches that contain invalid characters, 
+         * semantic-release will fail even if they are not the branch currently being 
+         * released. This is a known issue: 
+         * https://github.com/semantic-release/semantic-release/issues/1717
          */
         {
             /**
