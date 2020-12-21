@@ -50,7 +50,6 @@
     "gts": "^3.0.2",
     "husky": "^4.3.5",
     "lint-staged": "^10.5.3",
-    "run.env": "^1.1.0",
     "semantic-release": "^17.3.0",
     "supertest": "^6.0.1",
     "typescript": "^4.0.3"
