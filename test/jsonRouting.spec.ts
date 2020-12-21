@@ -1,13 +1,14 @@
-import test from 'ava';
 import {Router} from 'express';
 import {jsonRouting} from '../src';
 
-test("installs all 'jsonXXX' handlers", async t => {
-  const router = Router({});
-  const jsonRouter = jsonRouting({expressRouter: router});
-  t.truthy(jsonRouter.jsonDelete);
-  t.truthy(jsonRouter.jsonGet);
-  t.truthy(jsonRouter.jsonPatch);
-  t.truthy(jsonRouter.jsonPut);
-  t.truthy(jsonRouter.jsonPost);
+describe('jsonRouting', () => {
+  it("installs all 'jsonXXX' handlers", () => {
+    const router = Router({});
+    const jsonRouter = jsonRouting({expressRouter: router});
+    expect(jsonRouter.jsonDelete).not.toBeNull();
+    expect(jsonRouter.jsonGet).not.toBeNull();
+    expect(jsonRouter.jsonPatch).not.toBeNull();
+    expect(jsonRouter.jsonPut).not.toBeNull();
+    expect(jsonRouter.jsonPost).not.toBeNull();
+  });
 });

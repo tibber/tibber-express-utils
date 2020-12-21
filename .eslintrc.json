@@ -1,6 +1,7 @@
 {
-  "extends": "./node_modules/gts/",
-  "plugins": [
-    "ava"
-  ]
+  "extends": ["./node_modules/gts/", "plugin:jest/recommended"],
+  "plugins": ["jest"],
+  "rules": {
+    "jest/expect-expect": "off"
+  }
 }

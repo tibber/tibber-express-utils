@@ -77,9 +77,9 @@ export type JsonRequestHandlerResult<TPayload> =
  * The Logger interface whose implementation is to be supplied by the consuming service.
  */
 export interface Logger {
-  debug?(...args: any[]): unknown;
-  error?(...args: any[]): unknown;
-  info?(...args: any[]): unknown;
+  debug?(...args: unknown[]): unknown;
+  error?(...args: unknown[]): unknown;
+  info?(...args: unknown[]): unknown;
 }
 
 /**
