@@ -22,14 +22,6 @@
   "files": [
     "/dist/src"
   ],
-  "ava": {
-    "typescript": {
-      "rewritePaths": {
-        "src/": "dist/src/",
-        "test/": "dist/test/"
-      }
-    }
-  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -50,7 +42,7 @@
     "husky": "^4.3.5",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.3",
-    "semantic-release": "^17.3.0",
+    "semantic-release": "^17.4.1",
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.4",
     "typescript": "^4.0.3"
