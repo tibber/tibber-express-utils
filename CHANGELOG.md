@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/tibber/tibber-express-utils/compare/v3.1.0...v3.1.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* correct repo url ([02cff49](https://github.com/tibber/tibber-express-utils/commit/02cff4955ad3e6caea872b8443f4630fe1318e36))
+
 # [3.1.0](https://github.com/tibbercom/tibber-express-utils/compare/v3.0.0...v3.1.0) (2020-12-18)
 
 
