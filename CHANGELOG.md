@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/tibber/tibber-express-utils/compare/v3.2.0...v3.3.0) (2022-08-15)
+
+
+### Features
+
+* upgrade all dependencies ([27c91b4](https://github.com/tibber/tibber-express-utils/commit/27c91b447a612d56a9f24b0663ecac2d793d99bd))
+
 ## [3.1.1](https://github.com/tibber/tibber-express-utils/compare/v3.1.0...v3.1.1) (2022-03-16)
 
 
