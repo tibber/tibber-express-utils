@@ -46,10 +46,17 @@ export const jsonMiddleware: JsonMiddleware = (
        */
       return res.status(result.statusCode || 200).json(result.payload);
     } catch (err) {
+      let errorAsString;
+
       /**
        * If 'err' is an object that has a toString method, call it to get its string representation.
        */
-      const errorAsString = err && err.toString ? err.toString() : err;
+      if (err instanceof Error) {
+        errorAsString = err.toString();
+      } else if (typeof err === 'string' || err instanceof String) {
+        errorAsString = err;
+      }
+
       if (logger && logger.error) {
         logger.error(`ERROR ${req.method} ${req.url} ${errorAsString}`);
       }
