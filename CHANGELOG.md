@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/tibber/tibber-express-utils/compare/v3.3.0...v3.3.1) (2022-08-17)
+
+
+### Bug Fixes
+
+* upgrade gts to avoid got vulnerability ([b29d6e3](https://github.com/tibber/tibber-express-utils/commit/b29d6e3a7152c086a257512c9669b32c6819af42))
+
 ## [3.3.1-upgrade-gts-4.1](https://github.com/tibber/tibber-express-utils/compare/v3.3.0...v3.3.1-upgrade-gts-4.1) (2022-08-17)
 
 
