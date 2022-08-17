@@ -8,20 +8,22 @@ import {
   Logger,
 } from '../types';
 
-export const jsonPost = <TContext>(
-  jsonRouter: JsonRouter<TContext>,
-  _contextSelector: ContextSelector<TContext>,
-  logger?: Logger
-) => <TPayload>(
-  path: PathParams,
-  handler: JsonRequestHandler<TContext, TPayload>
-) =>
-  jsonRouter.post(
-    path,
-    jsonMiddleware(
-      NoContentIfNoCodeOtherwiseOk,
-      _contextSelector,
-      handler,
-      logger
-    )
-  );
+export const jsonPost =
+  <TContext>(
+    jsonRouter: JsonRouter<TContext>,
+    _contextSelector: ContextSelector<TContext>,
+    logger?: Logger
+  ) =>
+  <TPayload>(
+    path: PathParams,
+    handler: JsonRequestHandler<TContext, TPayload>
+  ) =>
+    jsonRouter.post(
+      path,
+      jsonMiddleware(
+        NoContentIfNoCodeOtherwiseOk,
+        _contextSelector,
+        handler,
+        logger
+      )
+    );

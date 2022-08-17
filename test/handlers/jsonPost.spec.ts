@@ -5,26 +5,28 @@ import {JsonRequestHandlerResult} from '../../src';
 import {jsonRouting} from '../../src';
 import {HttpError, ProblemDetailsError} from '../../src/errors';
 
-const run = <TResult, TPayload>(
-  type: 'return' | 'throw',
-  result: JsonRequestHandlerResult<TResult>,
-  expectCode: number,
-  expectPayload: TPayload
-) => async () => {
-  const router = Router({});
-  const jsonRouter = jsonRouting({expressRouter: router});
+const run =
+  <TResult, TPayload>(
+    type: 'return' | 'throw',
+    result: JsonRequestHandlerResult<TResult>,
+    expectCode: number,
+    expectPayload: TPayload
+  ) =>
+  async () => {
+    const router = Router({});
+    const jsonRouter = jsonRouting({expressRouter: router});
 
-  jsonRouter.jsonPost('/test', () => {
-    if (type === 'throw') throw result;
-    return result;
-  });
+    jsonRouter.jsonPost('/test', () => {
+      if (type === 'throw') throw result;
+      return result;
+    });
 
-  const app = express();
-  app.use(jsonRouter);
+    const app = express();
+    app.use(jsonRouter);
 
-  const response = await request(app).post('/test').expect(expectCode);
-  expect(response.body).toStrictEqual(expectPayload);
-};
+    const response = await request(app).post('/test').expect(expectCode);
+    expect(response.body).toStrictEqual(expectPayload);
+  };
 
 describe('jsonPost', () => {
   it(

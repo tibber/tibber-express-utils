@@ -11,6 +11,6 @@ export const hasOwnProperty = <
 >(
   target: TTarget,
   propertyKey: TPropertyKey
-): target is TTarget & Record<TPropertyKey, unknown> => {
+): target is Record<TPropertyKey, unknown> & TTarget => {
   return Object.prototype.hasOwnProperty.call(target, propertyKey);
 };
