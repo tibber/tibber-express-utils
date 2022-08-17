@@ -8,20 +8,22 @@ import {
   Logger,
 } from '../types';
 
-export const jsonDelete = <TContext>(
-  jsonRouter: JsonRouter<TContext>,
-  _contextSelector: ContextSelector<TContext>,
-  logger?: Logger
-) => <TPayload>(
-  path: PathParams,
-  handler: JsonRequestHandler<TContext, TPayload>
-) =>
-  jsonRouter.delete(
-    path,
-    jsonMiddleware(
-      NoContentIfNoCodeOtherwiseOk,
-      _contextSelector,
-      handler,
-      logger
-    )
-  );
+export const jsonDelete =
+  <TContext>(
+    jsonRouter: JsonRouter<TContext>,
+    _contextSelector: ContextSelector<TContext>,
+    logger?: Logger
+  ) =>
+  <TPayload>(
+    path: PathParams,
+    handler: JsonRequestHandler<TContext, TPayload>
+  ) =>
+    jsonRouter.delete(
+      path,
+      jsonMiddleware(
+        NoContentIfNoCodeOtherwiseOk,
+        _contextSelector,
+        handler,
+        logger
+      )
+    );

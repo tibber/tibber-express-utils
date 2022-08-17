@@ -13,29 +13,31 @@ class TestLogger {
   }
 }
 
-const run = <TResult, TPayload>(
-  type: 'return' | 'throw',
-  result: JsonRequestHandlerResult<TResult>,
-  expectCode: number,
-  expectPayload: TPayload,
-  expectLogMsg?: string
-) => async () => {
-  const router = Router({});
-  const logger = new TestLogger();
-  const jsonRouter = jsonRouting({expressRouter: router, logger});
+const run =
+  <TResult, TPayload>(
+    type: 'return' | 'throw',
+    result: JsonRequestHandlerResult<TResult>,
+    expectCode: number,
+    expectPayload: TPayload,
+    expectLogMsg?: string
+  ) =>
+  async () => {
+    const router = Router({});
+    const logger = new TestLogger();
+    const jsonRouter = jsonRouting({expressRouter: router, logger});
 
-  jsonRouter.jsonGet('/test', () => {
-    if (type === 'throw') throw result;
-    return result;
-  });
+    jsonRouter.jsonGet('/test', () => {
+      if (type === 'throw') throw result;
+      return result;
+    });
 
-  const app = express();
-  app.use(jsonRouter);
+    const app = express();
+    app.use(jsonRouter);
 
-  const response = await request(app).get('/test').expect(expectCode);
-  expect(response.body).toStrictEqual(expectPayload);
-  expect(logger.lastError).toBe(expectLogMsg);
-};
+    const response = await request(app).get('/test').expect(expectCode);
+    expect(response.body).toStrictEqual(expectPayload);
+    expect(logger.lastError).toBe(expectLogMsg);
+  };
 
 describe('jsonGet', () => {
   it(
