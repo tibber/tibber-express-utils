@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tibber-express-utils
+  annotations:
+    github.com/project-slug: tibber/tibber-express-utils
+  tags:
+    - typescript
+spec:
+  type: library
+  lifecycle: production
