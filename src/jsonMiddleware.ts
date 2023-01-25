@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 import {HttpError, ProblemDetailsError} from './errors';
 import {JsonMiddleware} from './types';
 import {isHttpResult} from './utils/isHttpResult';
@@ -9,7 +9,7 @@ export const jsonMiddleware: JsonMiddleware = (
   handler,
   logger
 ) => {
-  return async (req: Request, res: Response) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     try {
       /**
        * Execute the RequestHandler provided against the request, extracting the context
@@ -67,13 +67,18 @@ export const jsonMiddleware: JsonMiddleware = (
        */
       if (err instanceof ProblemDetailsError) {
         const {detail, httpStatus: status, instance, title, type} = err;
-        return res.status(status).contentType('application/problem+json').json({
-          detail,
-          instance,
-          status,
-          title,
-          type,
-        });
+        const response = res
+          .status(status)
+          .contentType('application/problem+json')
+          .json({
+            detail,
+            instance,
+            status,
+            title,
+            type,
+          });
+        next(err);
+        return response;
       }
 
       /**
@@ -81,13 +86,19 @@ export const jsonMiddleware: JsonMiddleware = (
        * message, and send that.
        */
       if (err instanceof HttpError) {
-        return res.status(err.httpStatus || 500).send({err: err.message});
+        const response = res
+          .status(err.httpStatus || 500)
+          .json({err: err.message});
+        next(err);
+        return response;
       }
 
       /**
        * As last resort, send error's string representation as the message.
        */
-      return res.status(500).send({err: errorAsString});
+      const response = res.status(500).send({err: errorAsString});
+      next(err);
+      return response;
     }
   };
 };

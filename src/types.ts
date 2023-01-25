@@ -1,4 +1,4 @@
-import {Request, Response, Router} from 'express';
+import {NextFunction, Request, Response, Router} from 'express';
 import {PathParams} from 'express-serve-static-core';
 import {HttpResult} from './HttpResult';
 
@@ -102,7 +102,11 @@ export type JsonMiddleware = {
     contextSelector: ContextSelector<TContext>,
     handler: JsonRequestHandler<TContext, TPayload>,
     logger?: Logger
-  ): (req: Request, res: Response) => Promise<Response<TPayload>>;
+  ): (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => Promise<Response<TPayload>>;
 };
 
 /**
