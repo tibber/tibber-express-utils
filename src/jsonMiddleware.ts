@@ -66,11 +66,19 @@ export const jsonMiddleware: JsonMiddleware = (
        * additional details as a JSON payload.
        */
       if (err instanceof ProblemDetailsError) {
-        const {detail, httpStatus: status, instance, title, type} = err;
+        const {
+          detail,
+          httpStatus: status,
+          instance,
+          title,
+          type,
+          extensions,
+        } = err;
         const response = res
           .status(status)
           .contentType('application/problem+json')
-          .json({
+          .send({
+            ...(extensions ?? {}),
             detail,
             instance,
             status,
