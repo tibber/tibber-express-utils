@@ -1,8 +1,8 @@
 import {HttpError} from './HttpError';
 
 export type ProblemDetailsArgs = {
-  detail: string;
-  instance: string;
+  detail?: string;
+  instance?: string;
   statusCode: number;
   title: string;
   type: string;
@@ -12,10 +12,10 @@ export type ProblemDetailsArgs = {
 };
 
 export class ProblemDetailsError extends HttpError {
-  public detail: string;
   public type: string;
-  public instance: string;
   public title: string;
+  public detail?: string;
+  public instance?: string;
   public extensions?: {
     [k: string]: unknown;
   };
@@ -23,7 +23,7 @@ export class ProblemDetailsError extends HttpError {
   constructor(args: ProblemDetailsArgs) {
     const {detail, instance, statusCode, title, type, extensions} = args;
 
-    super(detail, statusCode);
+    super(detail ?? title, statusCode);
 
     this.detail = detail;
     this.type = type;
