@@ -10,7 +10,7 @@
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix && sortier \"./**/*.{ts,tsx,js,jsx}\"",
-    "prepare": "yarn run compile",
+    "prepare": "yarn run compile && husky install",
     "pretest": "yarn run compile",
     "posttest": "yarn run lint",
     "release": "semantic-release",
