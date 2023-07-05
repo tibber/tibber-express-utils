@@ -1,3 +1,10 @@
+## [3.3.2](https://github.com/tibber/tibber-express-utils/compare/v3.3.1...v3.3.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* Adjust context selector type ([75e2a83](https://github.com/tibber/tibber-express-utils/commit/75e2a83d99f63caad2f79b2bb1e20879ec7ca3e8))
+
 ## [3.3.1](https://github.com/tibber/tibber-express-utils/compare/v3.3.0...v3.3.1) (2022-08-17)
 
 
