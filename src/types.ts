@@ -59,7 +59,7 @@ export type JsonRouteMatcher<TContext> = {
  */
 export type JsonRequestHandler<TContext, TPayload> = (
   req: Request,
-  ctx?: TContext
+  ctx: TContext
 ) => JsonRequestHandlerResult<TPayload>;
 
 /**
