@@ -4,8 +4,9 @@ metadata:
   name: tibber-express-utils
   annotations:
     github.com/project-slug: tibber/tibber-express-utils
+    circleci.com/project-slug: gh/tibber/express-utils
   tags:
-    - typescript
+  - typescript
 spec:
   type: library
   lifecycle: production
