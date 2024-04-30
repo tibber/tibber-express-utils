@@ -1,3 +1,11 @@
+## [3.3.3](https://github.com/tibber/tibber-express-utils/compare/v3.3.2...v3.3.3) (2024-04-30)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/traverse from 7.18.11 to 7.24.5 ([0798af3](https://github.com/tibber/tibber-express-utils/commit/0798af346502aaae020debed8ef69f08aae5501a))
+* **deps:** bump http-cache-semantics from 4.1.0 to 4.1.1 ([eaa2e5c](https://github.com/tibber/tibber-express-utils/commit/eaa2e5cddbdc928d8bd74c0b4cb07ac10853a8bc))
+
 ## [3.3.2](https://github.com/tibber/tibber-express-utils/compare/v3.3.1...v3.3.2) (2023-07-05)
 
 
