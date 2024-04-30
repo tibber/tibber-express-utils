@@ -1,3 +1,13 @@
+## [3.3.4](https://github.com/tibber/tibber-express-utils/compare/v3.3.3...v3.3.4) (2024-04-30)
+
+
+### Bug Fixes
+
+* **deps:** bump ip from 2.0.0 to 2.0.1 ([e310131](https://github.com/tibber/tibber-express-utils/commit/e3101318f706c7ebccf1c1411386fe7f11c1cc61))
+* **deps:** bump semver from 5.7.1 to 5.7.2 ([ace56c8](https://github.com/tibber/tibber-express-utils/commit/ace56c89006913b815d1a213845df2e5fc7d5705))
+* **deps:** bump tar from 6.1.11 to 6.2.1 ([e98faa7](https://github.com/tibber/tibber-express-utils/commit/e98faa752d7963b2a7b073a9e2237959ed14c25c))
+* **deps:** bump word-wrap from 1.2.3 to 1.2.4 ([49972c1](https://github.com/tibber/tibber-express-utils/commit/49972c17ddec44111fa5af502f6502f76ef33b6c))
+
 ## [3.3.3](https://github.com/tibber/tibber-express-utils/compare/v3.3.2...v3.3.3) (2024-04-30)
 
 
