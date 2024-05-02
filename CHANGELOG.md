@@ -1,3 +1,10 @@
+## [3.3.5](https://github.com/tibber/tibber-express-utils/compare/v3.3.4...v3.3.5) (2024-05-02)
+
+
+### Bug Fixes
+
+* **deps:** bump postcss from 8.4.16 to 8.4.38 ([f443aad](https://github.com/tibber/tibber-express-utils/commit/f443aada209d52f092aa7e46f37f0d13aadc23e1))
+
 ## [3.3.4](https://github.com/tibber/tibber-express-utils/compare/v3.3.3...v3.3.4) (2024-04-30)
 
 
