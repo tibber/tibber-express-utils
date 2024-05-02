@@ -1,3 +1,10 @@
+## [3.3.6](https://github.com/tibber/tibber-express-utils/compare/v3.3.5...v3.3.6) (2024-05-02)
+
+
+### Bug Fixes
+
+* **deps:** bump json5 from 2.2.1 to 2.2.3 ([2f90e11](https://github.com/tibber/tibber-express-utils/commit/2f90e1132eb274ba254cde01f9e33439a9d6062a))
+
 ## [3.3.5](https://github.com/tibber/tibber-express-utils/compare/v3.3.4...v3.3.5) (2024-05-02)
 
 
