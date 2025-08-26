@@ -1,3 +1,27 @@
+# [4.0.0-express-5-major-version-bump.1](https://github.com/tibber/tibber-express-utils/compare/v3.3.6...v4.0.0-express-5-major-version-bump.1) (2025-08-26)
+
+
+* Use express 5, fix some bugs, new tests, bump to 4.0.0 ([d12fa91](https://github.com/tibber/tibber-express-utils/commit/d12fa91f6bac2ca06a92a00c777e760a6ec7032d))
+
+
+### BREAKING CHANGES
+
+* Express 5 +++
+
+# [4.0.0](https://github.com/tibber/tibber-express-utils/compare/v3.3.6...v4.0.0) (2025-08-26)
+
+
+### Features
+
+* **express:** upgrade to Express 5 support ([#express5-upgrade](https://github.com/tibber/tibber-express-utils/commit/express5-upgrade))
+
+### BREAKING CHANGES
+
+* **express:** This version now requires Express 5.x as a peer dependency and Node.js 18+
+* **node:** Minimum Node.js version is now 18.0.0 (required by Express 5)
+* **dependencies:** Express is now a peer dependency instead of a dev dependency
+* ServerError return correct 500 code, not 400
+
 ## [3.3.6](https://github.com/tibber/tibber-express-utils/compare/v3.3.5...v3.3.6) (2024-05-02)
 
 

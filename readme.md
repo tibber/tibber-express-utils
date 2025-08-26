@@ -3,10 +3,15 @@
 
 # Usage
 
+## Requirements
+
+- **Node.js**: 18 or higher
+- **Express**: 5.x (peer dependency)
+
 ## Install
 
 ```
-$ yarn install --save tibber-express-utils
+$ yarn add tibber-express-utils express@5
 ```
 
 ## Usage
@@ -75,6 +80,29 @@ In order to migrate to `3.0.0`:
 
 1. Update `jsonRouting(express.Router(), contextSelector)` statements to `jsonRouting({contextSelector, expressRouter: express.Router()})` or
    more preferably to `jsonRouting({contextSelector, logger, expressRouter: express.Router()})`).
+
+## Upgrading to 4.0.0
+
+Breaking changes in `4.0.0` include:
+
+ - **Express 5 Support**: This version now supports Express 5.x as a peer dependency.
+ - **Node.js Requirement**: Minimum Node.js version is now 18.0.0 (required by Express 5).
+
+### Migration from 3.x.x to 4.0.0
+
+To migrate to `4.0.0`:
+
+1. **Update Node.js**: Ensure you're running Node.js 18 or higher.
+2. **Update Express**: Install Express 5.x:
+   ```bash
+   yarn add express@5
+   ```
+3. **Update your package**: Update tibber-express-utils to 4.x:
+   ```bash
+   yarn add tibber-express-utils@4
+   ```
+
+**Note**: This library maintains the same API and doesn't use any deprecated Express features, so no code changes should be required in most cases.
 
 # Development
 
