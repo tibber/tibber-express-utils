@@ -1,3 +1,25 @@
+# [4.0.0](https://github.com/tibber/tibber-express-utils/compare/v3.3.6...v4.0.0) (2025-08-26)
+
+
+* BREAKING CHANGE: 4.0.0 ([3c70f2f](https://github.com/tibber/tibber-express-utils/commit/3c70f2f62bd1267d7676d99bd34f8693c9cea42c))
+* Express 5 major version bump (#44) ([bf77a03](https://github.com/tibber/tibber-express-utils/commit/bf77a03773368f8106e2d5d5ff3d7edeb0baaa17)), closes [#44](https://github.com/tibber/tibber-express-utils/issues/44)
+
+
+### BREAKING CHANGES
+
+* 4.0.0
+* Express 5 +++
+
+* chore(release): 4.0.0-express-5-major-version-bump.1 [skip ci]
+
+# [4.0.0-express-5-major-version-bump.1](https://github.com/tibber/tibber-express-utils/compare/v3.3.6...v4.0.0-express-5-major-version-bump.1) (2025-08-26)
+
+* Use express 5, fix some bugs, new tests, bump to 4.0.0 ([d12fa91](https://github.com/tibber/tibber-express-utils/commit/d12fa91f6bac2ca06a92a00c777e760a6ec7032d))
+
+### BREAKING CHANGES
+
+* Express 5 +++
+
 # [4.0.0-express-5-major-version-bump.1](https://github.com/tibber/tibber-express-utils/compare/v3.3.6...v4.0.0-express-5-major-version-bump.1) (2025-08-26)
 
 
