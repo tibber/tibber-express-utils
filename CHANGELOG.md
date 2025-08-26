@@ -1,3 +1,13 @@
+# [4.0.0-express-5-major-version-bump.1](https://github.com/tibber/tibber-express-utils/compare/v3.3.6...v4.0.0-express-5-major-version-bump.1) (2025-08-26)
+
+
+* Use express 5, fix some bugs, new tests, bump to 4.0.0 ([d12fa91](https://github.com/tibber/tibber-express-utils/commit/d12fa91f6bac2ca06a92a00c777e760a6ec7032d))
+
+
+### BREAKING CHANGES
+
+* Express 5 +++
+
 # [4.0.0](https://github.com/tibber/tibber-express-utils/compare/v3.3.6...v4.0.0) (2025-08-26)
 
 
