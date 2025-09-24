@@ -1,3 +1,11 @@
+## [4.0.1](https://github.com/tibber/tibber-express-utils/compare/v4.0.0...v4.0.1) (2025-09-24)
+
+
+### Bug Fixes
+
+* **deps:** bump braces from 3.0.2 to 3.0.3 ([a58e7a1](https://github.com/tibber/tibber-express-utils/commit/a58e7a103238b4bb6a80ffcf423fb7c33321c298))
+* **deps:** bump micromatch from 4.0.5 to 4.0.8 ([8213a6f](https://github.com/tibber/tibber-express-utils/commit/8213a6fa155b118754525da8c2ad740037fa497d))
+
 # [4.0.0](https://github.com/tibber/tibber-express-utils/compare/v3.3.6...v4.0.0) (2025-08-26)
 
 
