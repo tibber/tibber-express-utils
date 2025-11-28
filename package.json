@@ -15,10 +15,7 @@
     "posttest": "yarn run lint",
     "release": "semantic-release",
     "release:local": "dotenv semantic-release",
-    "release:preview": "npm pack --dry-run --json --loglevel=silent",
-    "cz": "git status && cz",
-    "cz:all": "git add . && git status && cz",
-    "cz:init": "commitizen init cz-conventional-changelog --yarn --dev --exact"
+    "release:preview": "npm pack --dry-run --json --loglevel=silent"
   },
   "files": [
     "/dist/src"
@@ -32,9 +29,7 @@
     "@types/jest": "^28.1.6",
     "@types/node": "^18.7.2",
     "@types/supertest": "^2.0.12",
-    "commitizen": "^4.3.1",
     "conventional-commits": "^1.6.0",
-    "cz-conventional-changelog": "^3.3.0",
     "dotenv-cli": "^6.0.0",
     "eslint-plugin-jest": "^26.8.2",
     "eslint-plugin-node": "^11.1.0",
@@ -63,10 +58,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tibber/tibber-express-utils.git"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
