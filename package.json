@@ -1,6 +1,6 @@
 {
   "name": "tibber-express-utils",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "",
   "main": "./dist/src/index.js",
   "scripts": {
