@@ -1,3 +1,10 @@
+## [4.0.5](https://github.com/tibber/tibber-express-utils/compare/v4.0.4...v4.0.5) (2026-01-22)
+
+
+### Bug Fixes
+
+* **deps:** bump tar from 7.5.2 to 7.5.6 ([#50](https://github.com/tibber/tibber-express-utils/issues/50)) ([b9b3b15](https://github.com/tibber/tibber-express-utils/commit/b9b3b158b54086f0b40db789a7bbd2e39c7ebc49))
+
 ## [4.0.4](https://github.com/tibber/tibber-express-utils/compare/v4.0.3...v4.0.4) (2026-01-22)
 
 
