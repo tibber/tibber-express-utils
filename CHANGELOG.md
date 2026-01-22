@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/tibber/tibber-express-utils/compare/v4.0.3...v4.0.4) (2026-01-22)
+
+
+### Bug Fixes
+
+* **deps:** bump lodash from 4.17.21 to 4.17.23 ([#49](https://github.com/tibber/tibber-express-utils/issues/49)) ([cf1fc15](https://github.com/tibber/tibber-express-utils/commit/cf1fc1543a070039204b19c619f7d390f9ade9ad))
+
 ## [4.0.3](https://github.com/tibber/tibber-express-utils/compare/v4.0.2...v4.0.3) (2026-01-22)
 
 
