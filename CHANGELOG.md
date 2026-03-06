@@ -1,3 +1,10 @@
+## [4.0.7](https://github.com/tibber/tibber-express-utils/compare/v4.0.6...v4.0.7) (2026-03-06)
+
+
+### Bug Fixes
+
+* **deps:** bump tar from 7.5.9 to 7.5.10 ([3afbbc1](https://github.com/tibber/tibber-express-utils/commit/3afbbc19a1539b237c73907144103c93ac678ecf))
+
 ## [4.0.6](https://github.com/tibber/tibber-express-utils/compare/v4.0.5...v4.0.6) (2026-03-03)
 
 
