@@ -1,3 +1,10 @@
+## [4.0.9](https://github.com/tibber/tibber-express-utils/compare/v4.0.8...v4.0.9) (2026-03-18)
+
+
+### Bug Fixes
+
+* vulnerabilities ([e28bcb8](https://github.com/tibber/tibber-express-utils/commit/e28bcb87c954da0f0409c4db3c1047de811ee2a8))
+
 ## [4.0.9-fix-vuln.1](https://github.com/tibber/tibber-express-utils/compare/v4.0.8...v4.0.9-fix-vuln.1) (2026-03-18)
 
 
