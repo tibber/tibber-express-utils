@@ -1,3 +1,10 @@
+## [4.0.10](https://github.com/tibber/tibber-express-utils/compare/v4.0.9...v4.0.10) (2026-03-27)
+
+
+### Bug Fixes
+
+* **deps:** bump handlebars from 4.7.8 to 4.7.9 ([aea54d3](https://github.com/tibber/tibber-express-utils/commit/aea54d324959d26f97ef9081802acd0985e1f311))
+
 ## [4.0.9](https://github.com/tibber/tibber-express-utils/compare/v4.0.8...v4.0.9) (2026-03-18)
 
 
