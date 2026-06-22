@@ -1,3 +1,10 @@
+## [4.0.14](https://github.com/tibber/tibber-express-utils/compare/v4.0.13...v4.0.14) (2026-06-22)
+
+
+### Bug Fixes
+
+* **deps:** bump form-data from 4.0.4 to 4.0.6 ([bfad464](https://github.com/tibber/tibber-express-utils/commit/bfad464d4c9b40afd8dee0059c90c0c3368b4dcb))
+
 ## [4.0.13](https://github.com/tibber/tibber-express-utils/compare/v4.0.12...v4.0.13) (2026-05-12)
 
 
