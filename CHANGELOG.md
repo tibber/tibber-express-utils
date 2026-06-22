@@ -1,3 +1,10 @@
+## [4.0.16](https://github.com/tibber/tibber-express-utils/compare/v4.0.15...v4.0.16) (2026-06-22)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/core from 7.29.0 to 7.29.7 ([28bd9f0](https://github.com/tibber/tibber-express-utils/commit/28bd9f0cb6b5af8c6f1c4e6bd59c111e355c865f))
+
 ## [4.0.15](https://github.com/tibber/tibber-express-utils/compare/v4.0.14...v4.0.15) (2026-06-22)
 
 
