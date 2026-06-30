@@ -1,3 +1,10 @@
+## [4.0.18](https://github.com/tibber/tibber-express-utils/compare/v4.0.17...v4.0.18) (2026-06-30)
+
+
+### Bug Fixes
+
+* **deps:** bump @sigstore/core from 3.1.0 to 3.2.1 ([dc645d7](https://github.com/tibber/tibber-express-utils/commit/dc645d7304e73e034ad023711b23bc21c067346b))
+
 ## [4.0.17](https://github.com/tibber/tibber-express-utils/compare/v4.0.16...v4.0.17) (2026-06-22)
 
 
