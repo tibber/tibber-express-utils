@@ -19,7 +19,9 @@ title to `fix(deps): …` if consumers should get the bump.
 
 **If the publish step fails** after semantic-release has pushed the version
 bump: just rerun the job — the already-published guard sees the committed
-version is missing from npm and publishes it. (Versions 4.0.14–4.0.18 were
+version is missing from npm and publishes it. Note this self-heal applies to
+*any* master build, release or not: while the committed version is missing
+from npm, the next merge of any kind publishes it. (Versions 4.0.14–4.0.18 were
 tagged during the broken-token era but never reached npm; consumers jump
 from 4.0.13 straight to the first post-fix release.)
 
