@@ -1,3 +1,10 @@
+## [4.0.19](https://github.com/tibber/tibber-express-utils/compare/v4.0.18...v4.0.19) (2026-07-25)
+
+
+### Bug Fixes
+
+* **release:** publish to npm via CircleCI OIDC trusted publishing ([dcef951](https://github.com/tibber/tibber-express-utils/commit/dcef951ff804b6ca2d028432b837c19af0d36a9c))
+
 ## [4.0.18](https://github.com/tibber/tibber-express-utils/compare/v4.0.17...v4.0.18) (2026-06-30)
 
 
