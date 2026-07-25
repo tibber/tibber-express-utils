@@ -5,12 +5,14 @@ workflows:
       - build_and_deploy:
           context:
             - GITHUB
-            - NPM
 jobs:
   build_and_deploy:
     working_directory: ~/package
     docker:
-      - image: cimg/node:lts
+      # cimg/node:24.18.0 ships npm 11.16.0; CircleCI OIDC trusted
+      # publishing requires npm >= 11.11.0 (same pattern as tibber-aws /
+      # tibber-dsf / tibber-httpclient).
+      - image: cimg/node:24.18.0
     steps:
       - checkout
       - run:
@@ -18,4 +20,24 @@ jobs:
           command: |
             yarn
             yarn test
+            # semantic-release computes the version from commits, pushes the
+            # version-bump commit + tag, and creates the GitHub release. It
+            # no-ops on PR builds and non-release branches. npmPublish is off
+            # in .releaserc.js; the registry publish happens below via OIDC
+            # trusted publishing (no stored npm token, nothing for 2FA to
+            # block).
             yarn release
+            if [ "$CIRCLE_BRANCH" != "master" ]; then
+              echo "not master — skipping npm publish"
+              exit 0
+            fi
+            V=$(node -p "require('./package.json').version")
+            if npm view "tibber-express-utils@$V" version >/dev/null 2>&1; then
+              echo "tibber-express-utils@$V already published, skipping"
+              exit 0
+            fi
+            NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
+            export NPM_ID_TOKEN
+            # Provenance is emitted automatically under trusted publishing —
+            # no --provenance flag needed.
+            npm publish

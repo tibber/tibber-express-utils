@@ -1,5 +1,30 @@
 # Usage
 
+## Releases & publishing — read before merging a PR
+
+Merging to `master` runs the CircleCI `build_and_deploy` job:
+[semantic-release](https://semantic-release.gitbook.io/) computes the version
+from the squash-commit title (conventional commits: `fix:` → patch, `feat:` →
+minor, `feat!:`/`BREAKING CHANGE` → major; `chore:`/`docs:`/plain titles →
+**no release**), pushes the version-bump commit + tag, creates the GitHub
+release, and the job then publishes to npm via
+[trusted publishing](https://docs.npmjs.com/trusted-publishers) (CircleCI
+OIDC — no stored npm token; requires this package's npmjs trusted-publisher
+entry and npm ≥ 11.11, i.e. the `cimg/node:24` image).
+
+**Dep-update PRs**: Dependabot's `fix(deps): …` titles trigger a patch
+release on merge. A tool that squashes with a plain title (e.g. Renovate's
+default `Update dependency x to vY`) will NOT publish — edit the squash
+title to `fix(deps): …` if consumers should get the bump.
+
+**If the publish step fails** after semantic-release has pushed the version
+bump: just rerun the job — the already-published guard sees the committed
+version is missing from npm and publishes it. Note this self-heal applies to
+*any* master build, release or not: while the committed version is missing
+from npm, the next merge of any kind publishes it. (Versions 4.0.14–4.0.18 were
+tagged during the broken-token era but never reached npm; consumers jump
+from 4.0.13 straight to the first post-fix release.)
+
 ## Requirements
 
 - **Node.js**: 18 or higher
