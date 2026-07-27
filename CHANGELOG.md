@@ -1,3 +1,10 @@
+## [4.0.20](https://github.com/tibber/tibber-express-utils/compare/v4.0.19...v4.0.20) (2026-07-27)
+
+
+### Bug Fixes
+
+* **deps:** bump tar from 7.5.16 to 7.5.22 ([e76532b](https://github.com/tibber/tibber-express-utils/commit/e76532bde9a747bf3aef6aa360ffa8560d3fdd06))
+
 ## [4.0.19](https://github.com/tibber/tibber-express-utils/compare/v4.0.18...v4.0.19) (2026-07-25)
 
 
