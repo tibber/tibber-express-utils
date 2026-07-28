@@ -55,17 +55,25 @@ export type JsonRouteMatcher<TContext> = {
  * the Request object and (optionally) a Context instance that has been
  * extracted from the Request by the JsonRouter.
  *
- * It is expected that the handler returns a JsonRequestHandlerResult.
+ * It is expected that the handler returns a JsonRequestHandlerResult, either
+ * directly or as a Promise — jsonMiddleware awaits the return value, so an
+ * `async` handler (the common case for anything doing I/O) is supported.
  */
 export type JsonRequestHandler<TContext, TPayload> = (
   req: Request,
   ctx: TContext
-) => JsonRequestHandlerResult<TPayload>;
+) =>
+  | JsonRequestHandlerResult<TPayload>
+  | Promise<JsonRequestHandlerResult<TPayload>>;
 
 /**
  * The allowable return types of a JsonRequestHandler. A JsonRequestHandler
  * may return undefined, an HTTP status code (number) or an HttpResult
  * encapsulating a TPayload instance.
+ *
+ * This is the *awaited* result: a handler may also return a Promise of it
+ * (see JsonRequestHandler). Guards such as isHttpResult operate on the
+ * resolved value, so they keep taking this synchronous shape.
  */
 export type JsonRequestHandlerResult<TPayload> =
   | undefined

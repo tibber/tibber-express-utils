@@ -41,6 +41,13 @@ router.jsonGet<{name: string}>('/x/:id', req => {
   return new HttpResult(200, {name: String(req.params.id)});
 });
 router.jsonPost<{ok: boolean}>('/y', () => ({ok: true}));
+// Async handlers must type-check through the PUBLISHED declarations — the
+// common case for anything doing I/O. Both explicit and inferred TPayload.
+router.jsonGet<{name: string}>('/async/:id', async req => {
+  await Promise.resolve();
+  return new HttpResult(200, {name: String(req.params.id)});
+});
+router.jsonPost('/async-inferred', async () => new HttpResult(201, {id: 7}));
 router.jsonPut<{ok: boolean}>('/y/:id', () => new HttpResult(200, {ok: true}, {'x-trace': 'abc'}));
 router.jsonPatch('/y/:id', () => undefined);
 router.jsonDelete('/z/:id', () => 204);

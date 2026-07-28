@@ -76,6 +76,16 @@ router.jsonDelete('/accepted', () => ({queued: true}));
 router.jsonGet('/boom', () => {
   throw new lib.Errors.NotFoundError('missing');
 });
+// Async handlers: awaited results and rejected promises must behave like their
+// synchronous counterparts through the installed package.
+router.jsonGet('/async', async () => {
+  await Promise.resolve();
+  return new lib.HttpResult(200, {async: true});
+});
+router.jsonGet('/async-boom', async () => {
+  await Promise.resolve();
+  throw new lib.Errors.NotFoundError('async missing');
+});
 
 app.use(router);
 
@@ -119,6 +129,13 @@ const main = async () => {
 
     const boom = await call('/boom');
     assert.equal(boom.status, 404, `thrown NotFoundError must map to 404, got ${boom.status}`);
+
+    const asyncOk = await call('/async');
+    assert.equal(asyncOk.status, 200, `async handler: expected 200, got ${asyncOk.status}`);
+    assert.deepEqual(asyncOk.body, {async: true}, 'awaited HttpResult payload must round-trip');
+
+    const asyncBoom = await call('/async-boom');
+    assert.equal(asyncBoom.status, 404, `rejected async handler must map to 404, got ${asyncBoom.status}`);
     assert.ok(logged.length > 0, 'a supplied logger must receive handler errors');
     assert.ok(
       propagated.some(e => e instanceof lib.Errors.NotFoundError),
@@ -127,7 +144,7 @@ const main = async () => {
   } finally {
     await new Promise(resolve => server.close(resolve));
   }
-  console.log('  ✓ runtime: exports, error classes, and 6 routes served from the installed tarball');
+  console.log('  ✓ runtime: exports, error classes, and 8 routes served from the installed tarball');
 };
 
 main().catch(err => {
