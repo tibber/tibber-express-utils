@@ -1,3 +1,10 @@
+## [4.0.21](https://github.com/tibber/tibber-express-utils/compare/v4.0.20...v4.0.21) (2026-07-28)
+
+
+### Bug Fixes
+
+* **deps:** resolve all open Dependabot alerts (dev-scope toolchain) ([#75](https://github.com/tibber/tibber-express-utils/issues/75)) ([19a22fd](https://github.com/tibber/tibber-express-utils/commit/19a22fd3417334faaaacc77dc9f6eceb147559d7))
+
 ## [4.0.20](https://github.com/tibber/tibber-express-utils/compare/v4.0.19...v4.0.20) (2026-07-27)
 
 
