@@ -34,8 +34,15 @@ fi
 echo "==> compile"
 yarn --silent compile
 echo "==> pack"
-TARBALL="$REPO_ROOT/$(npm pack --silent | tail -1)"
-[ -f "$TARBALL" ] || { echo "pack produced no tarball" >&2; exit 1; }
+# Read the filename from --json rather than the last stdout line, so npm printing
+# anything else on stdout can't silently yield a wrong path.
+#
+# --ignore-scripts is required for that to work: the `prepare` hook writes yarn
+# and husky chatter to stdout ahead of the JSON. It's also correct here — we
+# compiled above, so re-running prepare would only duplicate the build.
+TARBALL="$REPO_ROOT/$(npm pack --json --ignore-scripts |
+    node -p 'JSON.parse(require("fs").readFileSync(0, "utf8")).at(-1).filename')"
+[ -f "$TARBALL" ] || { echo "pack produced no tarball at $TARBALL" >&2; exit 1; }
 
 WORKDIRS=()
 cleanup() {
@@ -65,13 +72,27 @@ JSON
 
     (
         cd "$WORK"
+        # The scratch install hits the registry, so it can fail for reasons that
+        # have nothing to do with the code under test. This step gates publish —
+        # retry a transient blip rather than failing an otherwise-good release.
         # --no-package-lock keeps the scratch install fast and disposable.
-        npm install --silent --no-audit --no-fund --no-package-lock \
-            "$TARBALL" \
-            "express@${EXPRESS_VERSION}" \
-            "typescript@${TS_VERSION}" \
-            "@types/express@^5" \
-            "@types/node@^22" >/dev/null
+        for attempt in 1 2 3; do
+            if npm install --silent --no-audit --no-fund --no-package-lock \
+                "$TARBALL" \
+                "express@${EXPRESS_VERSION}" \
+                "typescript@${TS_VERSION}" \
+                "@types/express@^5" \
+                "@types/node@^22" >/dev/null 2>"$WORK/npm-install.log"; then
+                break
+            fi
+            if [ "$attempt" = 3 ]; then
+                echo "    ✗ scratch install failed after 3 attempts:" >&2
+                tail -20 "$WORK/npm-install.log" >&2
+                exit 1
+            fi
+            echo "    scratch install attempt ${attempt} failed; retrying in $((attempt * 5))s" >&2
+            sleep $((attempt * 5))
+        done
 
         echo "    express resolved: $(node -p "require('express/package.json').version")"
         node probe.cjs
