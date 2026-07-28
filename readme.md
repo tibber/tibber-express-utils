@@ -25,6 +25,35 @@ from npm, the next merge of any kind publishes it. (Versions 4.0.14–4.0.18 wer
 tagged during the broken-token era but never reached npm; consumers jump
 from 4.0.13 straight to the first post-fix release.)
 
+## Tests
+
+| Command | What it covers |
+|---|---|
+| `yarn test` | Unit suite (jest). Imports from `src/`, so it verifies behaviour but **not** the published package. |
+| `yarn test:consumer` | Consumer smoke test. Packs the library and installs the tarball into a scratch project outside the repo, then verifies it as a consumer sees it. |
+
+`yarn test:consumer` ([test/consumer/](test/consumer/)) exists because the unit
+suite cannot fail for a whole class of breakage: a bad `main` or `files` entry, a
+renamed or dropped export, or `.d.ts` files a consumer can't resolve all leave it
+green while shipping a broken package. It asserts:
+
+- the package loads via plain `require`, and its export surface matches the
+  committed snapshot in `test/consumer/expected-exports.json` — changing that
+  file is how an API addition or removal becomes a reviewable decision;
+- a real Express app wired through the **installed** `jsonRouting` serves
+  requests, including the per-verb default status selectors (`jsonGet` →
+  `undefined` = 404; `jsonDelete` → `undefined` = 204, truthy = 202), thrown
+  `HttpError` mapping, that a supplied `Logger` receives handler errors, and that
+  errors still propagate via `next(err)` after the response is sent;
+- the emitted declarations type-check under `tsc --strict` from a consumer's own
+  tsconfig. Note `package.json` declares no `types` field, so type resolution
+  relies on tsc's `main` → `<main>.d.ts` fallback — this probe is what keeps that
+  working.
+
+It runs against both ends of the Express peer range (the `5.0.0` floor and the
+newest `^5`), and CI runs it **before** `yarn release`, so none of the above can
+publish.
+
 ## Requirements
 
 - **Node.js**: 18 or higher

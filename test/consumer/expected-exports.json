@@ -1,0 +1,20 @@
+{
+  "_comment": [
+    "Committed snapshot of the PUBLIC runtime surface of tibber-express-utils.",
+    "The consumer smoke test asserts the installed package exports exactly these",
+    "names, so an accidental removal or rename shows up as a reviewable diff in",
+    "this file instead of silently breaking consumers. Adding an export is a",
+    "one-line change here; removing one is a breaking change and must be a",
+    "deliberate major-version decision."
+  ],
+  "index": ["Errors", "HttpResult", "jsonMiddleware", "jsonRouting"],
+  "Errors": [
+    "BadRequestError",
+    "ConflictError",
+    "HttpError",
+    "NotAuthorizedError",
+    "NotFoundError",
+    "ProblemDetailsError",
+    "ServerError"
+  ]
+}
