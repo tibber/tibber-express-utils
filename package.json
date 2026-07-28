@@ -5,6 +5,7 @@
   "main": "./dist/src/index.js",
   "scripts": {
     "test": "jest --verbose",
+    "test:consumer": "bash test/consumer/run.sh",
     "test-single": "jest --verbose jsonDelete.spec.ts",
     "lint": "gts lint",
     "clean": "gts clean",
