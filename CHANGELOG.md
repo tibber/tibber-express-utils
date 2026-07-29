@@ -1,3 +1,10 @@
+## [4.0.22](https://github.com/tibber/tibber-express-utils/compare/v4.0.21...v4.0.22) (2026-07-29)
+
+
+### Bug Fixes
+
+* **types:** allow async JsonRequestHandlers ([7e86b1c](https://github.com/tibber/tibber-express-utils/commit/7e86b1c4b9a069b646d0699b19e2768980dbb4e8))
+
 ## [4.0.21](https://github.com/tibber/tibber-express-utils/compare/v4.0.20...v4.0.21) (2026-07-28)
 
 
