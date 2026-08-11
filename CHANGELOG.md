@@ -1,3 +1,10 @@
+## [4.0.23](https://github.com/tibber/tibber-express-utils/compare/v4.0.22...v4.0.23) (2026-08-11)
+
+
+### Bug Fixes
+
+* **deps:** bump ip-address from 10.2.0 to 10.4.0 ([7a66530](https://github.com/tibber/tibber-express-utils/commit/7a6653040e365849ae1fe1bc1a1492a3ed51127f))
+
 ## [4.0.22](https://github.com/tibber/tibber-express-utils/compare/v4.0.21...v4.0.22) (2026-07-29)
 
 
