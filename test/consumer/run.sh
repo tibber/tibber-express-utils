@@ -11,11 +11,11 @@
 #   probe.cjs  require() + export-surface snapshot + a real Express app
 #   probe.ts   tsc --noEmit --strict against the emitted .d.ts
 #
-# Repeats per Express version because `express` is a peerDependency (^5.0.0) and
-# jsonRouting decorates Express's Router object: the lowest supported version is
-# as much a part of the contract as the newest.
+# Repeats per Express version because `express` is a peerDependency
+# (^4.17.0 || ^5.0.0) and jsonRouting decorates Express's Router object: both
+# ends of both supported majors are as much a part of the contract as the newest.
 #
-# Usage: test/consumer/run.sh [express-version ...]   (default: floor + latest 5.x)
+# Usage: test/consumer/run.sh [express-version ...]   (default: floor + latest of 4.x and 5.x)
 # Exit:  0 all probes passed, non-zero on the first failure.
 set -euo pipefail
 
@@ -23,10 +23,11 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 HERE="$REPO_ROOT/test/consumer"
 cd "$REPO_ROOT"
 
-# Default matrix: the peer-range floor, and whatever the range resolves to today.
+# Default matrix: each supported major's floor, and whatever that major resolves
+# to today.
 EXPRESS_VERSIONS=("$@")
 if [ ${#EXPRESS_VERSIONS[@]} -eq 0 ]; then
-    EXPRESS_VERSIONS=("5.0.0" "^5.0.0")
+    EXPRESS_VERSIONS=("4.17.0" "^4.0.0" "5.0.0" "^5.0.0")
 fi
 
 # Compile with the repo's own toolchain, then pack. `npm pack` honours `files`,
@@ -60,6 +61,12 @@ for EXPRESS_VERSION in "${EXPRESS_VERSIONS[@]}"; do
     WORKDIRS+=("$WORK")
     echo "==> consumer probe · express@${EXPRESS_VERSION}"
 
+    # @types/express tracks the express major, so pair them: v5 types against an
+    # express 4 install (or vice versa) would type-check the wrong contract, and
+    # our .d.ts resolves `express` types from the CONSUMER's tree, not ours.
+    TYPES_MAJOR="${EXPRESS_VERSION#[\^~]}"
+    TYPES_MAJOR="${TYPES_MAJOR%%.*}"
+
     cp "$HERE/probe.cjs" "$HERE/probe.ts" "$HERE/tsconfig.json" "$HERE/expected-exports.json" "$WORK/"
     cat > "$WORK/package.json" <<'JSON'
 {
@@ -81,7 +88,7 @@ JSON
                 "$TARBALL" \
                 "express@${EXPRESS_VERSION}" \
                 "typescript@${TS_VERSION}" \
-                "@types/express@^5" \
+                "@types/express@^${TYPES_MAJOR}" \
                 "@types/node@^22" >/dev/null 2>"$WORK/npm-install.log"; then
                 break
             fi
@@ -94,7 +101,8 @@ JSON
             sleep $((attempt * 5))
         done
 
-        echo "    express resolved: $(node -p "require('express/package.json').version")"
+        echo "    express resolved: $(node -p "require('express/package.json').version")" \
+            "· @types/express: $(node -p "require('@types/express/package.json').version")"
         node probe.cjs
         npx --no-install tsc -p tsconfig.json
         echo "  ✓ types: declarations resolve and public generics accept documented usage"

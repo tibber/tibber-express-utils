@@ -50,19 +50,25 @@ green while shipping a broken package. It asserts:
   relies on tsc's `main` → `<main>.d.ts` fallback — this probe is what keeps that
   working.
 
-It runs against both ends of the Express peer range (the `5.0.0` floor and the
-newest `^5`), and CI runs it **before** `yarn release`, so none of the above can
-publish.
+It runs against both ends of both supported Express majors (the `4.17.0` and
+`5.0.0` floors, plus the newest `^4` and `^5`), with `@types/express` paired to
+the express major under test. CI runs it **before** `yarn release`, so none of
+the above can publish.
 
 ## Requirements
 
 - **Node.js**: 18 or higher
-- **Express**: 5.x (peer dependency)
+- **Express**: 4.17+ or 5.x (peer dependency)
+
+The library imports Express only as a type — nothing in the emitted JavaScript
+references it, and `jsonRouting` decorates whichever `Router` instance you pass
+in. So a single build serves both majors, and the shipped declarations resolve
+`express` types from *your* `@types/express`, whichever major that is.
 
 ## Install
 
 ```
-$ yarn add tibber-express-utils express@5
+$ yarn add tibber-express-utils express
 ```
 
 ## Usage
@@ -139,18 +145,24 @@ Breaking changes in `4.0.0` include:
  - **Express 5 Support**: This version now supports Express 5.x as a peer dependency.
  - **Node.js Requirement**: Minimum Node.js version is now 18.0.0 (required by Express 5).
 
+**Since the peer range widened to `^4.17.0 || ^5.0.0`, Express 5 is no longer
+required to be on 4.x** — the Node 18 floor still applies. Express 4 consumers
+stranded on `3.5.0` can move to 4.x without touching Express.
+
 ### Migration from 3.x.x to 4.0.0
 
 To migrate to `4.0.0`:
 
 1. **Update Node.js**: Ensure you're running Node.js 18 or higher.
-2. **Update Express**: Install Express 5.x:
-   ```bash
-   yarn add express@5
-   ```
-3. **Update your package**: Update tibber-express-utils to 4.x:
+2. **Update your package**: Update tibber-express-utils to 4.x:
    ```bash
    yarn add tibber-express-utils@4
+   ```
+3. **Express is optional**: staying on Express 4.17+ is supported. To also move to
+   Express 5, see its
+   [migration guide](https://expressjs.com/en/guide/migrating-5.html):
+   ```bash
+   yarn add express@5
    ```
 
 **Note**: This library maintains the same API and doesn't use any deprecated Express features, so no code changes should be required in most cases.
