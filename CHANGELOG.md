@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/tibber/tibber-express-utils/compare/v4.0.23...v4.1.0) (2026-08-18)
+
+
+### Features
+
+* widen express peer range to support 4.17+ alongside 5 ([96c534e](https://github.com/tibber/tibber-express-utils/commit/96c534eaa1a23b65080c28650a7f79bf8158e8bf))
+
 ## [4.0.23](https://github.com/tibber/tibber-express-utils/compare/v4.0.22...v4.0.23) (2026-08-11)
 
 
