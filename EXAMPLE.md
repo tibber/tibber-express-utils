@@ -73,3 +73,5 @@ async function createUser(userData: any) {
 - No code changes required if upgrading from Express 4
 - All existing `tibber-express-utils` APIs remain the same
 - Express 5 is backward compatible with Express 4 patterns
+
+<!-- temporary: agent-farm public-repo dispatch gate test (PLA-1412) — remove with this PR -->
