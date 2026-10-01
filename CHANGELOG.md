@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/tibber/tibber-express-utils/compare/v4.1.0...v4.1.1) (2026-10-01)
+
+
+### Bug Fixes
+
+* **deps:** patch open Dependabot alerts ([#87](https://github.com/tibber/tibber-express-utils/issues/87)) ([d1489c8](https://github.com/tibber/tibber-express-utils/commit/d1489c808ff5582d23cdf107ef1a2474e875dec0)), closes [#86](https://github.com/tibber/tibber-express-utils/issues/86) [#82](https://github.com/tibber/tibber-express-utils/issues/82) [#81](https://github.com/tibber/tibber-express-utils/issues/81) [#83](https://github.com/tibber/tibber-express-utils/issues/83)
+
 # [4.1.0](https://github.com/tibber/tibber-express-utils/compare/v4.0.23...v4.1.0) (2026-08-18)
 
 
