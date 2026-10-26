@@ -1,3 +1,10 @@
+## [4.1.4](https://github.com/tibber/tibber-express-utils/compare/v4.1.3...v4.1.4) (2026-10-26)
+
+
+### Bug Fixes
+
+* **deps:** bump proxy-addr from 2.0.7 to 2.0.8 ([#91](https://github.com/tibber/tibber-express-utils/issues/91)) ([475e8e2](https://github.com/tibber/tibber-express-utils/commit/475e8e2236bfb8ceef65353b2a8ef69cb24812fb))
+
 ## [4.1.3](https://github.com/tibber/tibber-express-utils/compare/v4.1.2...v4.1.3) (2026-10-26)
 
 
