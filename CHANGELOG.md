@@ -1,3 +1,10 @@
+## [4.1.3](https://github.com/tibber/tibber-express-utils/compare/v4.1.2...v4.1.3) (2026-10-26)
+
+
+### Bug Fixes
+
+* **deps:** bump source-map-js from 1.2.1 to 1.2.2 ([7d6408d](https://github.com/tibber/tibber-express-utils/commit/7d6408da37d3172ebb4488d9a51bd5be50c07f19))
+
 ## [4.1.2](https://github.com/tibber/tibber-express-utils/compare/v4.1.1...v4.1.2) (2026-10-26)
 
 
