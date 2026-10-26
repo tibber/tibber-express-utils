@@ -1,3 +1,11 @@
+## [4.1.2](https://github.com/tibber/tibber-express-utils/compare/v4.1.1...v4.1.2) (2026-10-26)
+
+
+### Bug Fixes
+
+* **deps:** bump handlebars from 4.7.9 to 4.7.10 ([#88](https://github.com/tibber/tibber-express-utils/issues/88)) ([cc26e14](https://github.com/tibber/tibber-express-utils/commit/cc26e143cda18ff64aef816d929316c5dcd01dcf))
+* **deps:** bump postcss-selector-parser from 7.1.5 to 7.1.6 ([#89](https://github.com/tibber/tibber-express-utils/issues/89)) ([f33af80](https://github.com/tibber/tibber-express-utils/commit/f33af80c14494bda898e2a74ee6436c5c6fe7af2))
+
 ## [4.1.1](https://github.com/tibber/tibber-express-utils/compare/v4.1.0...v4.1.1) (2026-10-01)
 
 
