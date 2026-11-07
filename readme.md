@@ -100,26 +100,21 @@ router.get('/api/test5', (req, res)=>{
 
 ### Deprecating routes
 
-`registerDeprecated` sets the [`Deprecation`](https://www.rfc-editor.org/rfc/rfc9745),
-[`Sunset`](https://www.rfc-editor.org/rfc/rfc8594) and `Link: rel="successor-version"` headers on
-every request to a deprecated route. It also passes each request to `onCall`, where you record it
-in whatever logs or metrics your service uses, so you can tell when nobody calls the route any more.
+Use `registerDeprecated` to tell callers a route is going away and to see who still calls it. Each
+request to the route gets the [`Deprecation`](https://www.rfc-editor.org/rfc/rfc9745),
+[`Sunset`](https://www.rfc-editor.org/rfc/rfc8594) and `Link: rel="successor-version"` headers, and
+is passed to `onCall` with its caller (the `x-tibber-caller` header, else `User-Agent`). Register it
+before the route's handler. It also covers the paths below the route.
 
 ```ts
-import {registerDeprecated} from 'tibber-express-utils';
-
-registerDeprecated(router, '/homes/{id}', {
+registerDeprecated(router, '/homes/:id', {
   deprecationDate: '2026-11-01',
-  sunsetDate: '2027-02-01',
-  successorRoute: '/v2/homes/{id}',
-  onCall: (call, req) => req.log.warn(call, 'deprecated endpoint called'), // {caller, method, route, sunsetDate}
+  sunsetDate: '2027-02-01', // optional
+  successorRoute: '/v2/homes', // optional
+  onCall: (call, req) => req.log.warn(call, 'deprecated endpoint called'), // call: {caller, method, route, sunsetDate}
 });
 router.jsonGet('/homes/:id', getHome);
 ```
-
-- Register it before the route's handler. It is mounted with `router.use`, so it also marks every route under the path.
-- `caller` comes from the `x-tibber-caller` header, or from `User-Agent` if that header is missing.
-- The dates are validated at registration, so a bad date fails at startup.
 
 ## Upgrading to 2.0.0
 

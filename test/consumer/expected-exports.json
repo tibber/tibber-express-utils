@@ -7,7 +7,7 @@
     "one-line change here; removing one is a breaking change and must be a",
     "deliberate major-version decision."
   ],
-  "index": ["registerDeprecated", "Errors", "HttpResult", "jsonMiddleware", "jsonRouting"],
+  "index": ["Errors", "HttpResult", "jsonMiddleware", "jsonRouting", "registerDeprecated"],
   "Errors": [
     "BadRequestError",
     "ConflictError",

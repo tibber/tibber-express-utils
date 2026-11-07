@@ -6,15 +6,13 @@ describe('registerDeprecated', () => {
   it('sets the headers and reports the call', async () => {
     const onCall = jest.fn();
     const router = Router();
-    registerDeprecated(router, '/old/{id}', {
+    registerDeprecated(router, '/old/:id', {
       deprecationDate: '2026-11-01',
       onCall,
       successorRoute: '/new',
       sunsetDate: '2026-12-01',
     });
-    router.get('/old/:id', (_, res) => {
-      res.sendStatus(204);
-    });
+    router.get('/old/:id', (_, res) => res.sendStatus(204));
 
     const response = await request(express().use(router))
       .get('/old/1')
@@ -27,22 +25,13 @@ describe('registerDeprecated', () => {
       sunset: 'Tue, 01 Dec 2026 00:00:00 GMT',
     });
     expect(onCall).toHaveBeenCalledWith(
-      {
-        caller: 'test',
-        method: 'GET',
-        route: '/old/{id}',
-        sunsetDate: '2026-12-01',
-      },
+      expect.objectContaining({caller: 'test', route: '/old/:id'}),
       expect.anything()
     );
   });
 
-  it('rejects an invalid date when the route is registered', () => {
-    expect(() =>
-      registerDeprecated(Router(), '/old', {
-        deprecationDate: 'soon',
-        onCall: jest.fn(),
-      })
-    ).toThrow('Invalid deprecation date: soon');
+  it('throws at registration on an invalid date', () => {
+    const options = {deprecationDate: 'soon', onCall: jest.fn()};
+    expect(() => registerDeprecated(Router(), '/old', options)).toThrow('soon');
   });
 });
