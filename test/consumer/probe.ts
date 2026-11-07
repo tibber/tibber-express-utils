@@ -15,6 +15,7 @@ import {
   Errors,
   HttpResult,
   jsonRouting,
+  registerDeprecated,
   type JsonRouter,
   type Logger,
 } from 'tibber-express-utils';
@@ -51,6 +52,14 @@ router.jsonPost('/async-inferred', async () => new HttpResult(201, {id: 7}));
 router.jsonPut<{ok: boolean}>('/y/:id', () => new HttpResult(200, {ok: true}, {'x-trace': 'abc'}));
 router.jsonPatch('/y/:id', () => undefined);
 router.jsonDelete('/z/:id', () => 204);
+
+// A JsonRouter is a Router, so a jsonXXX route can be deprecated ahead of its handler.
+registerDeprecated(router, '/old/{id}', {
+  deprecationDate: '2026-11-01',
+  sunsetDate: '2026-12-01',
+  onCall: (call, req) => console.warn(call.caller, call.route, req.path),
+});
+router.jsonGet('/old/:id', () => 204);
 
 app.use(router);
 
