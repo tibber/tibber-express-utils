@@ -8,7 +8,7 @@ export type DeprecationOptions = {
   /** Sent as the RFC 8594 `Sunset` header. */
   sunsetDate?: string;
   /**
-   * Called on every request to the route. `caller` is the `x-tibber-caller`
+   * Invoked on request to the route. `caller` is the `x-tibber-caller`
    * header, else `User-Agent`, else `'unknown'`.
    */
   onCall: (
@@ -19,8 +19,8 @@ export type DeprecationOptions = {
 
 /**
  * Marks `route` and every path under it as deprecated. It is mounted with
- * `router.use`, so register it before the route's handler. Dates are parsed with
- * `new Date()`, and an invalid one throws here, at startup.
+ * `router.use`. Register it before the route's handler. Dates are parsed with
+ * `new Date()`
  */
 export const registerDeprecated = (
   router: Router,
