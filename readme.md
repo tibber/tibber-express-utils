@@ -98,6 +98,24 @@ router.get('/api/test5', (req, res)=>{
 });
 ```
 
+### Deprecating routes
+
+Use `registerDeprecated` to tell callers a route is going away and to see who still calls it. Each
+request to the route gets the [`Deprecation`](https://www.rfc-editor.org/rfc/rfc9745),
+[`Sunset`](https://www.rfc-editor.org/rfc/rfc8594) and `Link: rel="successor-version"` headers, and
+is passed to `onCall` with its caller (the `x-tibber-caller` header, else `User-Agent`). Register it
+before the route's handler. It also covers the paths below the route.
+
+```ts
+registerDeprecated(router, '/homes/:id', {
+  deprecationDate: '2026-11-01',
+  sunsetDate: '2027-02-01', // optional
+  successorRoute: '/v2/homes', // optional
+  onCall: (call, req) => req.log.warn(call, 'deprecated endpoint called'), // call: {caller, method, route, sunsetDate}
+});
+router.jsonGet('/homes/:id', getHome);
+```
+
 ## Upgrading to 2.0.0
 
 Breaking changes in `2.0.0` include:
