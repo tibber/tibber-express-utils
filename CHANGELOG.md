@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/tibber/tibber-express-utils/compare/v4.1.4...v4.2.0) (2026-11-07)
+
+
+### Features
+
+* add registerDeprecated for Deprecation and Sunset headers ([#93](https://github.com/tibber/tibber-express-utils/issues/93)) ([13f5bca](https://github.com/tibber/tibber-express-utils/commit/13f5bca5134198a0169f1e251adcd3ab096fbaa0))
+
 ## [4.1.4](https://github.com/tibber/tibber-express-utils/compare/v4.1.3...v4.1.4) (2026-10-26)
 
 
