@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/tibber/tibber-express-utils/compare/v4.2.0...v4.2.1) (2026-11-09)
+
+
+### Bug Fixes
+
+* **deps:** bump qs from 6.16.0 to 6.17.1 ([#94](https://github.com/tibber/tibber-express-utils/issues/94)) ([b5c3901](https://github.com/tibber/tibber-express-utils/commit/b5c3901d63c65ba1a90f79467522128ea954b4a0))
+
 # [4.2.0](https://github.com/tibber/tibber-express-utils/compare/v4.1.4...v4.2.0) (2026-11-07)
 
 
