@@ -5,8 +5,10 @@ metadata:
   annotations:
     github.com/project-slug: tibber/tibber-express-utils
     circleci.com/project-slug: gh/tibber/tibber-express-utils
+    roadie.io/use-codeowners: "true"
   tags:
   - typescript
 spec:
   type: library
   lifecycle: production
+  owner: codeowners
