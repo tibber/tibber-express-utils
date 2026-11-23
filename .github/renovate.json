@@ -1,0 +1,12 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["local>tibber/renovate-config"],
+  "dependencyDashboard": true,
+  "enabledManagers": ["npm", "circleci", "github-actions"],
+  "schedule": ["* 9-12 * * 1"],
+  "lockFileMaintenance": { "enabled": true, "schedule": ["* 9-12 * * 1"] },
+  "osvVulnerabilityAlerts": true,
+  "packageRules": [
+    { "pinDigests": true, "matchUpdateTypes": ["major"], "enabled": false }
+  ]
+}
