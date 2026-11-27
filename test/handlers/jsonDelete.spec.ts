@@ -77,16 +77,18 @@ describe('jsonDelete', () => {
   );
 
   it(
-    "returns 500 and 'err' msg when handler throws string Error",
+    'returns 500 and a generic body when handler throws a string',
     run('throw', 'foo', 500, {
-      err: 'foo',
+      err: 'Unexpected error',
+      error: {code: 'INTERNAL', message: 'Unexpected error', traceId: expect.any(String)},
     })
   );
 
   it(
-    "returns 500 and 'err' msg from toString() when handler throws object",
+    'returns 500 and a generic body when handler throws an Error',
     run('throw', new Error('foo'), 500, {
-      err: 'Error: foo',
+      err: 'Unexpected error',
+      error: {code: 'INTERNAL', message: 'Unexpected error', traceId: expect.any(String)},
     })
   );
 });

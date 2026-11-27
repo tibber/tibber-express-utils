@@ -17,8 +17,14 @@ describe('ServerError', () => {
 
     const response = await request(app).get('/server-error').expect(500);
 
+    // A 5xx message may carry internal details, so it is not sent to the caller.
     expect(response.body).toStrictEqual({
-      err: 'Internal server error occurred',
+      err: 'Unexpected error',
+      error: {
+        code: 'INTERNAL',
+        message: 'Unexpected error',
+        traceId: expect.any(String),
+      },
     });
   });
 
