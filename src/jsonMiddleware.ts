@@ -1,3 +1,4 @@
+import {randomUUID} from 'crypto';
 import {NextFunction, Request, Response} from 'express';
 import {HttpError, ProblemDetailsError} from './errors';
 import {JsonMiddleware} from './types';
@@ -46,19 +47,17 @@ export const jsonMiddleware: JsonMiddleware = (
        */
       return res.status(result.statusCode || 200).json(result.payload);
     } catch (err) {
-      let errorAsString;
-
-      /**
-       * If 'err' is an object that has a toString method, call it to get its string representation.
-       */
-      if (err instanceof Error) {
-        errorAsString = err.toString();
-      } else if (typeof err === 'string' || err instanceof String) {
-        errorAsString = err;
-      }
+      const errorAsString = describeError(err);
+      const exposed = isExposed(err);
+      const traceId = exposed ? undefined : traceIdOf(req);
 
       if (logger && logger.error) {
-        logger.error(`ERROR ${req.method} ${req.url} ${errorAsString}`);
+        logger.error(
+          exposed
+            ? `ERROR ${req.method} ${req.url} ${errorAsString}`
+            : `ERROR ${req.method} ${req.url} ${errorAsString} (traceId=${traceId})` +
+                stackOf(err)
+        );
       }
 
       /**
@@ -90,23 +89,73 @@ export const jsonMiddleware: JsonMiddleware = (
       }
 
       /**
-       * If 'err' is a vanilla HttpError object, extract status code (defaulting to 500) and
-       * message, and send that.
+       * An HttpError below 500 was thrown on purpose for the caller: send its message.
        */
-      if (err instanceof HttpError) {
+      if (exposed) {
         const response = res
-          .status(err.httpStatus || 500)
-          .json({err: err.message});
+          .status((err as HttpError).httpStatus)
+          .json({err: (err as HttpError).message});
         next(err);
         return response;
       }
 
       /**
-       * As last resort, send error's string representation as the message.
+       * Anything else may carry internal details (upstream URLs, TypeErrors), so the
+       * caller only gets a generic body. A 5xx HttpError keeps its status.
        */
-      const response = res.status(500).send({err: errorAsString});
+      const status =
+        err instanceof HttpError && err.httpStatus >= 500 ? err.httpStatus : 500;
+      const response = res.status(status).json({
+        err: UNEXPECTED_ERROR_MESSAGE,
+        error: {
+          code: 'INTERNAL',
+          message: UNEXPECTED_ERROR_MESSAGE,
+          traceId,
+        },
+      });
       next(err);
       return response;
     }
   };
+};
+
+const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
+
+const isExposed = (err: unknown): boolean =>
+  err instanceof ProblemDetailsError ||
+  (err instanceof HttpError &&
+    typeof err.httpStatus === 'number' &&
+    err.httpStatus > 0 &&
+    err.httpStatus < 500);
+
+const describeError = (err: unknown): string | undefined => {
+  if (err instanceof Error) return err.toString();
+  if (typeof err === 'string' || err instanceof String) return String(err);
+  try {
+    return JSON.stringify(err);
+  } catch {
+    return undefined;
+  }
+};
+
+const stackOf = (err: unknown): string => {
+  if (!(err instanceof Error) || !err.stack) return '';
+  // The first stack line repeats err.toString(), which is already logged.
+  const frames = err.stack.split('\n').slice(1).join('\n');
+  return frames ? `\n${frames}` : '';
+};
+
+const TRACEPARENT = /^[\da-f]{2}-([\da-f]{32})-[\da-f]{16}-[\da-f]{2}$/;
+const SAFE_REQUEST_ID = /^[\w.-]{1,128}$/;
+
+/**
+ * Correlates the generic 500 body with the logged error: the W3C trace id if the
+ * caller sent one, else a well-formed x-request-id, else a fresh UUID.
+ */
+const traceIdOf = (req: Request): string => {
+  const traceparent = TRACEPARENT.exec(req.get('traceparent') ?? '');
+  if (traceparent) return traceparent[1];
+  const requestId = req.get('x-request-id');
+  if (requestId && SAFE_REQUEST_ID.test(requestId)) return requestId;
+  return randomUUID();
 };

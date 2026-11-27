@@ -18,9 +18,7 @@ describe('Express 5 features', () => {
 
     const response = await request(app).get('/async-error').expect(500);
 
-    expect(response.body).toStrictEqual({
-      err: 'Error: Async error test',
-    });
+    expect(response.body).toMatchObject({err: 'Unexpected error'});
   });
 
   it('handles rejected promises properly (Express 5 feature)', async () => {
@@ -36,8 +34,6 @@ describe('Express 5 features', () => {
 
     const response = await request(app).get('/rejected-promise').expect(500);
 
-    expect(response.body).toStrictEqual({
-      err: 'Error: Promise rejection test',
-    });
+    expect(response.body).toMatchObject({err: 'Unexpected error'});
   });
 });

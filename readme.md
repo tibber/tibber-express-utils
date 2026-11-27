@@ -101,6 +101,21 @@ router.get('/api/test5', (req, res)=>{
 });
 ```
 
+### Error responses
+
+What a `jsonXXX` route sends when its handler throws:
+
+| Thrown | Status | Body |
+|---|---|---|
+| `ProblemDetailsError` | its status | the problem details, as built |
+| `HttpError` with status below 500 (`BadRequestError`, `NotFoundError`, …) | its status | `{"err": "<message>"}` |
+| anything else, including `ServerError` and any `Error` | 500, or the `HttpError`'s 5xx status | `{"err": "Unexpected error", "error": {"code": "INTERNAL", "message": "Unexpected error", "traceId": "…"}}` |
+
+Throw a 4xx `HttpError` or a `ProblemDetailsError` for anything the caller should read. Other errors
+can carry upstream URLs or stack details, so only the logger gets them: the full error and stack,
+with the same `traceId`. The `traceId` is the trace id of a W3C `traceparent` header, else
+`x-request-id`, else a new UUID.
+
 ### Deprecating routes
 
 Use `registerDeprecated` to tell callers a route is going away and to see who still calls it. Each
@@ -187,6 +202,13 @@ To migrate to `4.0.0`:
    ```
 
 **Note**: This library maintains the same API and doesn't use any deprecated Express features, so no code changes should be required in most cases.
+
+## Upgrading to 4.3.0
+
+Errors other than a 4xx `HttpError` or a `ProblemDetailsError` no longer send their message to the
+caller (see [Error responses](#error-responses)). The body keeps the `err` field, now
+`"Unexpected error"`. A test that asserts `{err: 'Error: …'}` for a 500 needs updating, and a
+message the caller must see should be thrown as a 4xx `HttpError`.
 
 # Development
 

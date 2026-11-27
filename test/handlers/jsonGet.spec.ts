@@ -19,7 +19,7 @@ const run =
     result: JsonRequestHandlerResult<TResult>,
     expectCode: number,
     expectPayload: TPayload,
-    expectLogMsg?: string
+    expectLogMsg?: unknown
   ) =>
   async () => {
     const router = Router({});
@@ -36,7 +36,7 @@ const run =
 
     const response = await request(app).get('/test').expect(expectCode);
     expect(response.body).toStrictEqual(expectPayload);
-    expect(logger.lastError).toBe(expectLogMsg);
+    expect(logger.lastError).toEqual(expectLogMsg);
   };
 
 describe('jsonGet', () => {
@@ -90,28 +90,40 @@ describe('jsonGet', () => {
   );
 
   it(
-    "returns 500 and 'err' msg when handler throws string Error",
+    'returns 500 and a generic body when handler throws a string',
     run(
       'throw',
       'foo',
       500,
       {
-        err: 'foo',
+        err: 'Unexpected error',
+        error: {
+          code: 'INTERNAL',
+          message: 'Unexpected error',
+          traceId: expect.any(String),
+        },
       },
-      'ERROR GET /test foo'
+      expect.stringMatching(/^ERROR GET \/test foo \(traceId=[\w-]+\)$/)
     )
   );
 
   it(
-    "returns 500 and 'err' msg from toString() when handler throws object",
+    'returns 500 and a generic body, logging the full error, when handler throws an Error',
     run(
       'throw',
       new Error('foo'),
       500,
       {
-        err: 'Error: foo',
+        err: 'Unexpected error',
+        error: {
+          code: 'INTERNAL',
+          message: 'Unexpected error',
+          traceId: expect.any(String),
+        },
       },
-      'ERROR GET /test Error: foo'
+      expect.stringMatching(
+        /^ERROR GET \/test Error: foo \(traceId=[\w-]+\)\n\s+at /
+      )
     )
   );
 });
